@@ -1,0 +1,29 @@
+.white-box-shadow{
+  box-shadow: 0 3px 10px 0 rgba(36, 37, 38, .05); 
+  -webkit-box-shadow: 0 3px 10px 0 rgba(36, 37, 38, .05)    
+}
+.heavy-box-shadow{
+  box-shadow: 0 6px 15px 0 rgba(36, 37, 38, .08);
+  -webkit-box-shadow:  0 6px 15px 0 rgba(36, 37, 38, .08)  
+}
+
+.badge {
+  width: 20px;  
+  height: 20px;  
+  position: absolute;
+  top: -10px;
+  right: -8px
+}
+
+.green_to_yellow{
+  background-image: linear-gradient(to right,#116399,  #07b4b4, #f6e05e);  
+}
+
+.brand_yellow{
+  background-color: #ffe40f
+}
+
+
+.division{
+  border-top: 1px solid #262626
+}

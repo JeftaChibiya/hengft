@@ -1,0 +1,51 @@
+
+/*** Accordion, use: home page ***/
+
+.accordion {
+    overflow: hidden;
+  }
+  .accordion-link {
+    cursor: pointer;
+    display: block;
+    position: relative;
+    transition: all 0.4s ease;
+    overflow: hidden;
+    background-color:#435670;
+    border-radius: 0;
+  }
+  .accordion-link:before, .accordion-link:after {
+    content: '';
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+            transform: translateY(-50%);
+    width: 12px;
+    height: 2px;
+    background: #fff;
+    transition: -webkit-transform 0.4s ease;
+    transition: transform 0.4s ease;
+    transition: transform 0.4s ease, -webkit-transform 0.4s ease;
+  }
+  .accordion-link:after {
+    -webkit-transform: translateY(-50%) rotate(90deg);
+            transform: translateY(-50%) rotate(90deg);
+  }
+  .accordion-submenu {
+    background-color:#435670;
+    display: none;
+    font-size: 14px;
+  }
+  .accordion-submenu-item {
+    list-style-type: none  
+  }
+  .accordion-submenu-link {
+    color: #ccd1dd;
+  }
+  
+  .is-open .accordion-link:after {
+    -webkit-transform: translateY(-50%) rotate(0deg);
+            transform: translateY(-50%) rotate(0deg);
+  }
+  
+  /*** end ***/
