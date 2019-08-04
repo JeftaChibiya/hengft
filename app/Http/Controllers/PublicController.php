@@ -58,6 +58,19 @@ class PublicController extends Controller
         
         return view('site.specials');
 
-    }  
+    } 
+    
+    
+    /** 
+     *  Recently Cancelled Subscription
+     *  Acknowoledgement
+     * 
+     */    
+    public function postSubscriptionDeletion()
+    {
+        
+        return view('site.what-now');
+
+    }     
 
 }

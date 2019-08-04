@@ -10,7 +10,7 @@
         <a class="mb-4 p-2 no-underline text-3xl text-white font-bold uppercase" href="/tips">Tips</a>
         <a class="mb-4 p-2 no-underline text-3xl text-white font-bold uppercase" href="/inplay">Inplay</a>
         <a class="mb-4 p-2 no-underline text-3xl text-white font-bold uppercase" href="/specials">SPECIALS</a>
-      @if(Auth::user() && !Auth::user()->name == 'Admin')       
+      @if(Auth::user())       
         <a class="mb-4 p-2 no-underline text-3xl text-white font-bold uppercase" href="/settings">settings</a>           
       @endif           
     </div>

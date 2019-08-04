@@ -2,11 +2,22 @@
 
 namespace App\Http\Controllers\Auth;
 
+/** Essential custom classes  */
 use App\User;
+use Carbon\Carbon;
+use Stripe\Error\Card; // Stripe Card object
+use App\LocalStripePlan;
+
+
+/** Laravel classes  */
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+
 
 class RegisterController extends Controller
 {
@@ -23,13 +34,17 @@ class RegisterController extends Controller
 
     use RegistersUsers;
 
+    
+    
     /**
-     * Where to redirect users after registration.
+     *  Inform users to confirm their email address
      *
      * @var string
      */
-    protected $redirectTo = '/';
+    protected $redirectTo = '/email/verify';
 
+    
+    
     /**
      * Create a new controller instance.
      *
@@ -40,6 +55,9 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
+    
+    
+    
     /**
      * Get a validator for an incoming registration request.
      *
@@ -69,4 +87,70 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
     }
+
+
+    /**
+     *  Modified, includes Stripe / Laravel Cashierr functionality
+     *  01/07/2019
+     *  JC
+     * 
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function register(Request $request)
+    {
+        $this->validator($request->all())->validate();                
+
+        try {      
+
+            event(new Registered($user = $this->create($request->all())));
+
+            // stripe payment token from the request / card object
+            $token = request('stripeToken');        
+    
+            // find corresponding subscription plan in Db
+            $selectPlan = LocalStripePlan::find(request('plan')); 
+
+            
+            // create stripe user, start trial, no payment taken
+            $user->newSubscription('main', $selectPlan->plan_id)
+                    ->trialUntil(Carbon::now()->addDays($selectPlan->trial_period_days))               
+                    ->create($token,['name' =>  $user->name, 'email' => $user->email
+            ]);                         
+
+            // login user
+            $this->guard()->login($user);
+
+            // redirect
+            return $this->registered($request, $user)
+                         ?: redirect($this->redirectPath())
+                         ->with('flash', 'Welcome To Hengft!');         
+
+        } 
+        /** Errors related to selected plan or credentials */
+        catch (Exception $e) {
+            
+            return back()->with($e->getMessage());
+
+        }  
+        /** Errors related to Stripe card */        
+        catch (Card $e) {
+            
+            return back()->with($e->getJsonBody());
+
+            // Since it's a decline, \Stripe\Error\Card will be caught
+            // $body = $e->getJsonBody();
+            // $err  = $body['error'];
+
+            // print('Status is:' . $e->getHttpStatus() . "\n");
+            // print('Type is:' . $err['type'] . "\n");
+            // print('Code is:' . $err['code'] . "\n");
+
+            // // param is '' in this case
+            // print('Param is:' . $err['param'] . "\n");
+            // print('Message is:' . $err['message'] . "\n");            
+
+        }                                 
+    }    
 }

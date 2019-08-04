@@ -17,6 +17,21 @@ use Stripe\Invoice as StripeInvoice;
 
 class SettingsAPIController extends Controller
 {   
+
+
+    
+    /**
+     *   Ensure User is Authentheticated first
+     * 
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware(['auth', 'verified']);
+
+    }         
+
   
     //
     public function tips()

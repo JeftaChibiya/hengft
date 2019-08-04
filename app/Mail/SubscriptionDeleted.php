@@ -3,15 +3,18 @@
 namespace App\Mail;
 
 use App\User;
+
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
 
-class PaymentMethodUpdate extends Mailable
+
+class SubscriptionDeleted extends Mailable
 {
     use Queueable, SerializesModels;
+
 
 
     public $user;
@@ -30,6 +33,7 @@ class PaymentMethodUpdate extends Mailable
     }
 
 
+
     /**
      * Build the message.
      *
@@ -37,6 +41,8 @@ class PaymentMethodUpdate extends Mailable
      */
     public function build()
     {
-        return $this->markdown('email.payments.payment_method_update');
+        return $this->from('message@hengft.com', 'HengFT Tips')
+                    ->subject('Your HengFT account has been deleted')
+                    ->markdown('email.subscription.deleted');
     }
 }

@@ -10,7 +10,7 @@ import UpdateAccount from './views/UpdateAccount';
 import Billing from './views/Billing';
 import Notifications from './views/Notifications';
 import Invoices from './views/Invoices';
-import PaymentDetails from './views/PaymentDetails';
+import PaymentMethod from './views/PaymentMethod';
 import Cancel from './views/Cancel';
 import ConfirmCancel from './views/ConfirmCancel';
 
@@ -24,14 +24,14 @@ const router = new VueRouter({
 
     /***  Array of routes and view objects  ***/    
     routes: [                               
-        { path: '/account', component: UpdateAccount, name: 'update-account', meta: {title: 'HengFT | Update Account'} },
-        { path: '/subscription/plan', component: Billing, name: 'billing', meta: {title: 'HengFT | Billing'} },
+        { path: '/account/details/update', component: UpdateAccount, name: 'update-account', meta: {title: 'HengFT | Update Account'} },
+        { path: '/billing/plan/update', component: Billing, name: 'billing', meta: {title: 'HengFT | Billing'} },
         { path: '/subscription/notifications', component: Notifications, name: 'notifications', meta: {title: 'HengFT | Notifications'} },
         { path: '/subscription/invoices', component: Invoices, name: 'invoices', meta: {title: 'HengFT | Invoices'} },
-        { path: '/payment-details/edit', 
-          component: PaymentDetails, 
+        { path: '/subscription/payment-method/update', 
+          component: PaymentMethod, 
           name: 'payments',
-          meta: {title: 'HengFT | Payments'}             
+          meta: {title: 'HengFT | Payment Method'}             
         },
         { 
           name: 'cancel',          

@@ -7,6 +7,13 @@
 |
 |
 */
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use App\User;
+
+// AUTHENTICATION ROUTES
+Auth::routes(['verify' => true]);
 
 
 // ADMIN
@@ -14,9 +21,19 @@ Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
 });
 
+Route::get('mailable', function () {
+    
+    $user = User::where('stripe_id', 'cus_00000000000000')->get();
+
+    return new App\Mail\PaymentMethodUpdate($user[0]);
+
+});
+
+
+
 // User Settings API
 Route::put('account-update', 'UserSettingsController@updateAccount');
-Route::put('update_plan/{id}', 'UserSettingsController@updateSubscription');
+Route::put('update_plan/{id}', 'UserSettingsController@switchSubscription');
 Route::post('/del-notification/{id}', 'UserSettingsController@delNotification');
 Route::post('/cancel-subscription', 'UserSettingsController@cancelSubscription');
 Route::post('/resume-subscription', 'UserSettingsController@resumeSubscription');
@@ -29,14 +46,12 @@ Route::get('/all-tips', 'SettingsAPIController@tips');
 Route::get('/all-inplay-tips', 'SettingsAPIController@inplayTips');
 
 // Entrance
-Route::get('/settings/{setting?}', 'UsersController@userSettings')->where('setting', '[\/\w\.-]*');
+Route::get('/settings/{setting?}', 'UserSettingsController@index')->where('setting', '[\/\w\.-]*');
 
-
-// AUTHENTICATION ROUTES
-Auth::routes();
 
 // PUBLIC SITE ROUTES
 Route::get('/', 'PublicController@index')->name('home');
+Route::get('/what-now', 'PublicController@postSubscriptionDeletion')->name('what-now');
 Route::get('/pre-match-tips', 'PublicController@preMatchTips')->name('pre-match-tips');
 Route::get('/inplay-tips', 'PublicController@inplayTips')->name('inplay-tips');
 Route::get('/specials', 'PublicController@specials')->name('specials');

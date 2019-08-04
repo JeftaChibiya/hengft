@@ -2,9 +2,6 @@ window.Vue = require('vue');
 
 window._ = require('lodash');
 
-import Turbolinks from 'turbolinks';
-Turbolinks.start();
-
 import VueLetterAvatar from 'vue-letter-avatar';
 Vue.use(VueLetterAvatar);
 

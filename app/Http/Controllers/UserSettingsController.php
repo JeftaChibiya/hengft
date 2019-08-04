@@ -2,13 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use Illuminate\Http\Request;
 
+/**  7 User Actions. See User Settings  */
 class UserSettingsController extends Controller
 {
 
+    
     /**
-     * Instantiate a new controller instance.
+     *   Ensure User is Authentheticated first
+     * 
      *
      * @return void
      */
@@ -16,21 +20,19 @@ class UserSettingsController extends Controller
     {
         $this->middleware(['auth', 'verified']);
 
-    }
+    } 
 
-    /** 
-     * 
-     *  Main page for user-settings, managed with vue.js
-     * 
-     */
-    public function userSettings(){
+
+    /** Index */
+
+    public function index()
+    {   
 
         $user = Auth::user();
 
-        return view('user.show', compact('user'));
+        return view('settings.index', compact('user'));
 
-    } 
-
+    }  
 
     /** 
      * 
@@ -82,17 +84,14 @@ class UserSettingsController extends Controller
      * 
      * 
      */
-    public function updateSubscription(Request $request, $id){
+    public function switchSubscription(Request $request, $id){
 
         $user = User::find($id);
         
         // user
         $user = $user->subscription('main')->swap($request->get('plan'));        
     
-        $user->save();     
-        
-        // send email confirmation
-        Mail::to($request->user())->send(new ChangeSubscription($user));         
+        $user->save();                     
 
         $request->session()->flash('flash', 'Your changes have been saved');                 
 
@@ -112,12 +111,9 @@ class UserSettingsController extends Controller
 
             $token = request('stripeToken');
         
-            $user->updateCard($token);
+            $user->updateCard($token); // also update customer on stripe
 
-            $user->updateCardFromStripe();            
-
-            // send email confirmation
-            Mail::to($request->user())->send(new UpdatePaymentMethod($user));               
+            $user->updateCardFromStripe();                         
     
             $request->session()->flash('flash', 'Payment Method updated');  
         }               
@@ -145,21 +141,13 @@ class UserSettingsController extends Controller
         // cancel instantly
         if($request->get('when') == 'now'){          
 
-            $user->subscription('main')->cancelNow(); // cancel instantly
-            
-            Mail::to($request->user())->send(new DeleteSubscription($user));  // send email confirmation
-                                    
-            $user->logout(); // logout after a minute
-            
-            $user->delete(); // also remove user from file            
+            $user->subscription('main')->cancelNow(); // cancel instantly                                                        
 
         }
         // cancel at the end of grace period using scheduler 
         else if($request->get('when') == 'later'){
            
-            $user->subscription('main')->cancel();  // cancel later
-                        
-            // Mail::to($request->user())->send(new SubscriptionCancelledLater($user)); // send email confirmation
+            $user->subscription('main')->cancel();  // cancel later                        
                           
             $request->session()->flash('flash', 'Your request has been submitted');             
 

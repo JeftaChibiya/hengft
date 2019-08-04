@@ -17,9 +17,9 @@
         <div class="flex flex-col mb-8">
             <div class="mb-6 w-full sm:w-1/2">
                 <!-- if subscription to be cancelled later -->
-               <p class="text-gray-700 font-medium text-3xl leading-tight" v-if="when === 'later'">You are cancelling your account at a later date</p>                
+               <p class="text-gray-700 font-medium text-3xl leading-tight" v-if="when === 'later'">You are cancelling your account at a later date...</p>                
                 <!-- if subscription to be cancelled now -->                
-               <p class="text-gray-700 font-medium text-3xl" v-if="when === 'now'">You are cancelling your account right away</p>                
+               <p class="text-gray-700 font-medium text-3xl" v-if="when === 'now'">You are cancelling your account right away...</p>                
             </div>
             <div class="text-md border-b pb-8 text-gray-600 font-light w-full sm:w-1/2 leading-normal">
                 <p>
@@ -54,7 +54,8 @@
                             type="submit"
                             :class="[posting ? 'loader': '', submit ? 'opacity-50 cursor-not-allowed': '']"
                             :disabled="submit">
-                        <span class="tracking-wider">CANCEL</span>                 
+                            <span class="tracking-wider" v-if="when === 'later'">CANCEL LATER</span>                 
+                            <span class="tracking-wider" v-if="when === 'now'">CANCEL NOW</span>                            
                     </button>
                     <!-- button: discontinue cancellation -->
                     <router-link to="/subscription/cancel" tag="button" class="flex flex-col w-full justify-center items-center border border-gray-400 hover:border-gray-500 p-3 px-4 text-sm font-bold text-gray-700 hover:text-gray-800 rounded-full focus:outline-none" 

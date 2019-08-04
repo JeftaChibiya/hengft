@@ -104,8 +104,8 @@
                 this.submit = true;
                 this.posting = true;  
 
-                // resume account on server            
-                await axios.post('/resume-account')
+                // resume subscription on server            
+                await axios.post('/resume-subscription')
                      .then(() => this.$store.dispatch('getSubscriptionData')) 
                      .then(() => location.reload()) 
                      

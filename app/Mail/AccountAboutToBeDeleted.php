@@ -2,18 +2,21 @@
 
 namespace App\Mail;
 
-use App\User;
-use Carbon\Carbon;
-use App\LocalStripePlan;
+use App\User; 
+
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-/***  30.07.2019 ***/
-class SubscriptionPlanChange extends Mailable
+/** 
+ *  
+ *  04.08.2019
+ *  JC
+ * 
+ */
+class AccountAboutToBeDeleted extends Mailable
 {
-
     use Queueable, SerializesModels;
 
 
@@ -37,6 +40,7 @@ class SubscriptionPlanChange extends Mailable
         $this->user = $user;
 
     }
+
     
 
     /**
@@ -46,6 +50,12 @@ class SubscriptionPlanChange extends Mailable
      */
     public function build()
     {
-        return $this->markdown('email.subscription.change');
+        $endByDate = $this->user->subscriptions[0]['ends_at'];
+
+        return $this->subject('HengFT: A quick reminder')
+                    ->markdown('email.account.deletion_notice')
+                    ->with([
+                        'endByDate' => $endByDate
+                    ]);
     }
 }

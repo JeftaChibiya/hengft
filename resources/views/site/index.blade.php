@@ -1,8 +1,8 @@
 @extends('layouts.main')
 
 @section('title', 'HengFT: Get Straight To The Tips. No Ad Pop-ups')
-@section('description', 'Find Clutter-free And Easy To Digest Football Tips To Get You Straight To The Win')
-@section('robottext', 'noindex')
+@section('description', 'Clutter-free And Easy To Digest Football Tips To Get You Straight To The Win')
+@section('robottext', 'index')
 @section('keywords', 'Bettings Tips, Football Bettings Tips, Inplay Tips, Bookie Offers')
 
 <!-- fb meta tags -->
@@ -25,10 +25,9 @@
             </p>             
             
             <div class="w-full mx-auto mt-8 mb-10 sm:w-3/5">
-                <p class="mb-6 tracking-normal leading-normal text-center text-lg sm:text-xl font-light text-gray-300"> 
+                <p class="w-3/4 mx-auto mb-6 tracking-normal leading-normal text-center text-lg sm:text-xl font-light text-gray-300"> 
                     Sign up to our Monthly plan today, and enjoy HengFT Tips <b>Free</b> until 
-                    <b><span v-text="trialDuration.lastDayString"></span></b>. We'll send you an email reminder
-                    before then.
+                    <b><span v-text="trialDuration.lastDayString"></span></b>
                 </p> 
 
                 <div class="mb-10">
@@ -55,18 +54,7 @@
                             Day 3
                             <div class="absolute right-0 mr-2 h-3 w-3 rounded-full bg-gray-800"></div>                            
                         </div>            
-                    </div>
-                    <div class="flex items-stretch w-full text-xl text-gray-600">
-                        <div class="h-4 flex-1">
-
-                        </div>
-                        <div class="h-4 flex-1 border-r border-gray-500 font-bold text-sm relative text-gray-400">
-                            <span class="bottom-right">Email Reminder</span> 
-                        </div>
-                        <div class="h-4 flex-1">
-
-                        </div>            
-                    </div>              
+                    </div>             
                 </div>                
             
             </div>  

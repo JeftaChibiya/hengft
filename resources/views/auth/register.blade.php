@@ -2,7 +2,7 @@
 
 @section('title', 'HengFT | Get Started')
 @section('description', 'Create an account with HengFT, and get 3 to 5 days free')
-@section('keywords', 'create hengft account, signup, register, create account')
+@section('keywords', 'create account, hengft subscription, hengft account, hengft signup, register')
 
 
 @section('content')
@@ -32,9 +32,9 @@
     <div>     
         <!-- container and register form -->
         <div class="container mx-auto px-5 p-8 sm:px-48 sm:p-10 mb-12">        
-            <div class="flex flex-col sm:flex-row pl-3"> 
+            <div class="flex flex-col pl-3"> 
                 <div class="w-full sm:w-1/2 mr-10">
-                    <form id="payment-form" @submit.prevent="register" @keydown="submitted = false">
+                    <form id="payment-form" @submit.prevent="register" @keydown="submit = false">
 
                         <div class="mb-1">
                             <input type="hidden" id="2k1e09y" value="{{ config('services.stripe.key') }}">
@@ -43,9 +43,11 @@
                         <!-- subscription -->
                         <p class="text-sm font-bold mb-8 text-gray-700">PICK A SUBSCRIPTION</p>
                         <div class="mb-10">
-                            <div class="flex flex-row mb-4">
-                                <selectable-plan v-for="plan in plans" :plan="plan" :deactivate="deactivate" v-model="customer.activePlan" :key="plan.id"></selectable-plan>                                                                       
-                            </div>  
+                            <div class="flex flex-row">
+                                <!-- loop through avaiable plans + update selected plan + delete error when plan actually selected -->
+                                <selectable-plan v-for="plan in plans" :plan="plan" v-model="activePlan" :key="plan.id" @keydown="delete planError"></selectable-plan>                                                                       
+                            </div> 
+                            <span v-if="planError" class="text-red-500" v-text="Please select a subscription plan"></span>                              
                         </div>    
                         
                         <!-- Card details -->
@@ -82,7 +84,7 @@
                             <!-- username -->
                             <div class="mb-4">
                                 <div class="flex items-center border-b border-b-2 py-2 w-full mb-2" :class="[errors.name ? 'border-red-500': 'border-gray-300']">               
-                                    <input id="name" type="text" placeholder="Full Name" @keydown="delete errors.name" class="appearance-none bg-transparent border-none w-full text-black text-lg font-light py-1 leading-tight focus:outline-none" :class="[submitted ? 'opacity-50': '']" v-model="customer.name" aria-label="name"  :disabled="submitted" required/>                                                                                    
+                                    <input id="name" type="text" placeholder="Full Name" @keydown="delete errors.name" class="appearance-none bg-transparent border-none w-full text-black text-lg font-light py-1 leading-tight focus:outline-none" :class="[submit ? 'opacity-50': '']" v-model="customer.name" aria-label="name"  :disabled="submit" required/>                                                                                    
                                 </div>
                                 <span v-if="errors.name" class="text-red-500" v-text="errors.name[0]"></span>                            
                             </div>                             
@@ -90,15 +92,15 @@
                             <!-- email -->        
                             <div class="mb-4">
                                 <div class="flex border-b border-b-2 py-2 w-full mb-2" :class="[errors.email ? 'border-red-500': 'border-gray-300']">
-                                    <input id="email" type="email" placeholder="Email Address" @keydown="delete errors.email"  class="appearance-none bg-transparent border-none w-full text-black text-lg font-light py-1 leading-tight focus:outline-none"  :class="[submitted ? 'opacity-50': '']" v-model="customer.email" aria-label="email" :disabled="submitted" required />                       
+                                    <input id="email" type="email" placeholder="Email Address" @keydown="delete errors.email"  class="appearance-none bg-transparent border-none w-full text-black text-lg font-light py-1 leading-tight focus:outline-none"  :class="[submit ? 'opacity-50': '']" v-model="customer.email" aria-label="email" :disabled="submit" required />                       
                                 </div>
-                                <span v-if="errors.email" class="text-red-500" v-text="errors.email"></span>                            
+                                <span v-if="errors.email" class="text-red-500" v-text="errors.email[0]"></span>                            
                             </div>
 
                             <!-- password -->
                             <div class="mb-4">
                                 <div class="flex items-center border-b border-b-2 py-2 w-full mb-2" :class="[errors.password ? 'border-red-500': 'border-gray-300']">
-                                    <input id="password" type="password" @keydown="delete errors.password"  class="appearance-none bg-transparent border-none w-full text-black text-lg font-light py-1 leading-tight focus:outline-none" placeholder="Password" :class="[submitted ? 'opacity-50': '']" v-model="customer.password" aria-label="password" :disabled="submitted" required/>  
+                                    <input id="password" type="password" @keydown="delete errors.password"  class="appearance-none bg-transparent border-none w-full text-black text-lg font-light py-1 leading-tight focus:outline-none" placeholder="Password" :class="[submit ? 'opacity-50': '']" v-model="customer.password" aria-label="password" :disabled="submit" required/>  
                                 </div>
                                 <span v-if="errors.password" class="text-red-500" v-text="errors.password[0]"></span>                            
                             </div>
@@ -106,37 +108,20 @@
                             <!-- password confirmation -->
                             <div class="mb-3">
                                 <div class="flex items-center border-b border-b-2 py-2 w-full mb-1">
-                                    <input id="password-confirm" type="password" class="appearance-none bg-transparent border-none w-full text-black text-lg font-light py-1 leading-tight focus:outline-none" placeholder="Confirm Password" :class="[submitted ? 'opacity-50': '']" v-model="customer.password_confirmation" aria-label="password-confirm" :disabled="submitted" required>
+                                    <input id="password-confirm" type="password" class="appearance-none bg-transparent border-none w-full text-black text-lg font-light py-1 leading-tight focus:outline-none" placeholder="Confirm Password" :class="[submit ? 'opacity-50': '']" v-model="customer.password_confirmation" aria-label="password-confirm" :disabled="submit" required>
                                 </div>
                                 <span class="text-red-500"></span>                             
                             </div>                           
                         </div>
-                          
-
-                        <button class="tracking-wide flex justify-center items-center font-bold text-md mt-6 bg-gray-600 rounded-full p-4 w-full text-white focus:outline-none" 
-                                :class="[loading ? 'loader': '', submitted || !isDeactive ? 'bg-gray-600 opacity-50 cursor-not-allowed': 'bg-blue-500']" style="transition: .5s" type="submit" id="payment-btn" 
+                        
+                        <!-- submit button: deactivate until all fields filled in + show loading spinner + deactivate on submit -->
+                        <button class="flex justify-center items-center tracking-wide font-bold text-md mt-6 bg-gray-600 rounded-full p-4 w-full text-white focus:outline-none" 
+                                :class="[loading ? 'loader': '', submit || !isDeactive ? 'bg-gray-600 opacity-50 cursor-not-allowed': 'bg-blue-500']" style="transition: .5s" type="submit" id="payment-btn" 
                                 :disabled="!isDeactive"> 
                             CREATE ACCOUNT 
                         </button>                                                                                                                        
                     </form>   
-                </div> 
-                <div class="w-full pt-16">
-                    <transition name="fade">
-                        <div class="flex items-center pl-3 bg-gray-200 border border-gray-200" v-if="customer.activePlan.trial_period_days">
-                            <div>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24"><path fill="#cccccc" d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm5.848 12.459c.202.038.202.333.001.372-1.907.361-6.045 1.111-6.547 1.111-.719 0-1.301-.582-1.301-1.301 0-.512.77-5.447 1.125-7.445.034-.192.312-.181.343.014l.985 6.238 5.394 1.011z"/></svg>                                
-                            </div>
-                            <div class="p-4 text-gray-600">                        
-                                <p class="sm:text-md text-lg font-light leading-normal mb-2">
-                                    <span v-html="DateMessage"></span> <span v-text="plusTrialDays" class="font-medium text-gray-700"></span>
-                                </p> 
-                                <p class="sm:text-md text-lg font-light leading-normal">
-                                        <span v-html="EmailMessage"></span> <span v-text="trialDaysMinusOne" class="font-medium text-gray-700"></span>                            
-                                </p>                                               
-                            </div>                        
-                        </div>
-                    </transition>
-                </div>         
+                </div>          
             </div>
         </div>
 

@@ -32,22 +32,15 @@
     <meta name="twitter:image" content="@yield('twitter_img')"/>  
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-    <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css" rel="stylesheet" data-turbolinks-track="true">     -->
 
     <!-- fonts -->
-    <!-- Muli -->
     <link href="https://fonts.googleapis.com/css?family=Muli:400,600,700&display=swap" rel="stylesheet">
-
     <link href="https://fonts.googleapis.com/css?family=Alegreya+Sans:400,500,700&display=swap" rel="stylesheet">
-    <!-- font-family: 'Alegreya Sans', sans-serif; -->
     <link href="https://fonts.googleapis.com/css?family=Hind:300,400,500,600,700&display=swap" rel="stylesheet">    
-    <!-- font-family: 'Hind', sans-serif; -->
+    
     <!-- Styles -->
-
     <link rel="stylesheet" type="text/css" href="{{ mix('css/app.css') }}" data-turbolinks-track="true">    
-    
     <script src="https://js.stripe.com/v3/"></script> 
-    
     <script src="{{ mix('js/app.js') }}" defer></script>      
 
 </head>

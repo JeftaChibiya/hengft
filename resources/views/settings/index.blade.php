@@ -3,7 +3,7 @@
 @section('content')
 
 <keep-alive>
-<settings inline-template>
+<user-settings inline-template>
 <div>
 
 <div style="background: linear-gradient(180deg, rgb(23, 57, 147), rgb(45, 85, 151))">
@@ -39,10 +39,10 @@
       <div class="container mx-auto px-8 sm:px-24 py-4 sm:py-8 mb-4">
         <div class="flex flex-col">
           <div class="flex flex-wrap items-stretch w-full font-bold">                
-              <router-link active-class="text-blue-400 border-blue-400" tag="div" class="mr-2 mb-2 p-2 slow-transition border border-gray-500 rounded-full text-xs text-gray-600 font-medium" to="/account" exact>
+              <router-link active-class="text-blue-400 border-blue-400" tag="div" class="mr-2 mb-2 p-2 slow-transition border border-gray-500 rounded-full text-xs text-gray-600 font-medium" to="/account/details/update" exact>
                 <a>ACCOUNT</a>
               </router-link>
-              <router-link active-class="text-blue-400 border-blue-400" tag="div" class="mr-2 mb-2 p-2 slow-transition border border-gray-500 rounded-full text-xs text-gray-600 font-medium" to="/subscription/plan">
+              <router-link active-class="text-blue-400 border-blue-400" tag="div" class="mr-2 mb-2 p-2 slow-transition border border-gray-500 rounded-full text-xs text-gray-600 font-medium" to="/billing/plan/update">
                 <a>BILLING</a>
               </router-link>            
               
@@ -55,7 +55,7 @@
               <router-link active-class="text-blue-400 border-blue-400" tag="div" class="mr-2 mb-2 p-2 slow-transition border border-gray-500 rounded-full text-xs text-gray-600 font-medium" to="/subscription/invoices">
                 <a>INVOICES</a>
               </router-link>                    
-              <router-link active-class="text-blue-400 border-blue-400" tag="div" class="mr-2 mb-2 p-2 slow-transition border border-gray-500 rounded-full text-xs text-gray-600 font-medium" to="/payment-details/edit">
+              <router-link active-class="text-blue-400 border-blue-400" tag="div" class="mr-2 mb-2 p-2 slow-transition border border-gray-500 rounded-full text-xs text-gray-600 font-medium" to="/subscription/payment-method/update">
                 <a>PAYMENTS DETAILS</a>
               </router-link>                                       
               <router-link active-class="text-blue-400 border-blue-400" tag="div" class="mr-2 mb-2 p-2 slow-transition border border-gray-500 rounded-full text-xs text-gray-600 font-medium" to="/subscription/cancel">
@@ -73,6 +73,6 @@
           </div>
       </div> 
 </div> 
-</settings>
+</user-settings>
 </keep-alive>
 @endsection

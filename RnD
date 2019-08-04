@@ -1,0 +1,41 @@
+plusTrialDays: function () {
+    return moment().add(this.customer.activePlan.trial_period_days, 'days').format('ddd D MMM YYYY')
+},
+trialDaysMinusOne: function () {
+    return moment().add(this.customer.activePlan.trial_period_days - 1, 'days').format('ddd D MMM YYYY')
+}, 
+
+                <div class="w-full pt-16">
+                    <transition name="fade">
+                        <div class="flex items-center pl-3 bg-gray-200 border border-gray-200" v-if="customer.activePlan.trial_period_days">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24"><path fill="#cccccc" d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm5.848 12.459c.202.038.202.333.001.372-1.907.361-6.045 1.111-6.547 1.111-.719 0-1.301-.582-1.301-1.301 0-.512.77-5.447 1.125-7.445.034-.192.312-.181.343.014l.985 6.238 5.394 1.011z"/></svg>                                
+                            </div>
+                            <div class="p-4 text-gray-600">                        
+                                <p class="sm:text-md text-lg font-light leading-normal mb-2">
+                                    <span v-html="DateMessage"></span> <span v-text="plusTrialDays" class="font-medium text-gray-700"></span>
+                                </p> 
+                                <p class="sm:text-md text-lg font-light leading-normal">
+                                        <span v-html="EmailMessage"></span> <span v-text="trialDaysMinusOne" class="font-medium text-gray-700"></span>                            
+                                </p>                                               
+                            </div>                        
+                        </div>
+                    </transition>
+                </div>
+
+Route::get('test', function () {    
+
+    $users = DB::table('users')->join('subscriptions', function ($join) {
+                    
+        $join->on('users.id', '=', 'subscriptions.user_id')
+        ->whereDate('subscriptions.trial_ends_at', '<', Carbon::now())        
+             ->whereDate('subscriptions.ends_at', Carbon::now()->addDays(3));        
+
+     })->get();
+
+     $userDate = Auth::user()->subscriptions[0]->ends_at;
+
+
+    dd($users);
+
+});                

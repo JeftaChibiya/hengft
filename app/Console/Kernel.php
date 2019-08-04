@@ -5,6 +5,7 @@ namespace App\Console;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
+
 class Kernel extends ConsoleKernel
 {
     /**
@@ -16,6 +17,7 @@ class Kernel extends ConsoleKernel
         //
     ];
 
+ 
     /**
      * Define the application's command schedule.
      *
@@ -23,11 +25,19 @@ class Kernel extends ConsoleKernel
      * @return void
      */
     protected function schedule(Schedule $schedule)
-    {
-        // $schedule->command('inspire')
-        //          ->hourly();
+    {   
+        /** delete day-old tips and inplay tips */
+        $schedule->command('tips:delete-old-tips')->daily()->at('11:59'); 
+        
+        /** send email to user: account about to be deleted */        
+        $schedule->command('subscriber:deletion-notification')->hourly();
+
+        /** delete user with cancelled subscription */        
+        $schedule->command('delete:cancelled-subscriber')->daily()->at('11:59');
+
     }
 
+ 
     /**
      * Register the commands for the application.
      *

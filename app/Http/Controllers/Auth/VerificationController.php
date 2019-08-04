@@ -21,11 +21,11 @@ class VerificationController extends Controller
     use VerifiesEmails;
 
     /**
-     * Where to redirect users after verification.
+     *  Redirect to user setting after successful verrification
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/settings';
 
     /**
      * Create a new controller instance.

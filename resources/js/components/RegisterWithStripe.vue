@@ -1,11 +1,12 @@
 
 <script>
-
+// manage date + time
 import moment from 'moment'
+// custom checkbox: js + template
 import SelectablePlan from './SelectablePlan';
 
-// to prod
-let stripe = Stripe('pk_live_4wktgZA6yJrZU4beXGCoXXdE00qmn1gR6N'),
+// stripe API key + element object + card variable filled on load
+let stripe = Stripe('pk_test_mn0CWCCbMqesOBIi2HIghwjx00TQqq0vDt'),
     elements = stripe.elements(),
     card = undefined;
 
@@ -14,16 +15,14 @@ export default {
     data () {
       return {
         errors: {},  
-        DateMessage: 'First Billing Date:',
-        EmailMessage:'Email Reminder is sent on:',                        
+        planError: {},        
+        activePlan: {},                                
         loading: false, 
-        submitted: false,         
-        deactivate: true,       
-        cardError: '',                  
-        cardFormError: '',          
+        submit: false,             
+        cardErrorOnSubmit: '',                  
+        cardErrorBeforeSubmit: '',          
 
-        customer: {      
-          activePlan: {},                   
+        customer: {                        
           stripeToken: '',        
           name: '',
           email: '',
@@ -32,29 +31,108 @@ export default {
         }
 
       }
-    },   
-    filters: {
-    },           
-    components: {
-       
-       SelectablePlan,
+    },             
+    
+    components: { SelectablePlan },   
 
-    },   
-    computed: {
-        plusTrialDays: function () {
-            return moment().add(this.customer.activePlan.trial_period_days, 'days').format('ddd D MMM YYYY')
-        },
-        trialDaysMinusOne: function () {
-            return moment().add(this.customer.activePlan.trial_period_days - 1, 'days').format('ddd D MMM YYYY')
-        },                
+    watch: {
+        // no plan has been selected and form submitted
+        activePlan(){
+            if(this.activePlan.length < 1 && this.deactivate){
+                this.planError = true
+            }
+        }
+    },
+    computed: {               
         isDeactive: function(){
-          return this.customer.activePlan &&
+          return 
+            this.activePlan.length > 0 &&
             this.customer.name &&
             this.customer.email &&
             this.customer.password && 
             this.customer.password_confirmation                                        
         }
-    },       
+    },             
+    methods: {
+
+        // 1. set up stripe elements
+        setUpStripe(){
+            // Custom Styling
+            let style = {
+                base: {
+                    color: 'black',
+                    fontSize: '17px',
+                    fontWeight: '400',
+                    fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+                    fontSmoothing: 'antialiased',              
+                    '::placeholder': {
+                        color: '#999999'
+                    }
+                },
+                invalid: {
+                    color: '#E53A40',
+                    iconColor: '#fa755a'
+                }
+            }; 
+            // instantiate card element
+            card = elements.create('card', {style});
+            // mount it to the 'card' variable above
+            card.mount(this.$refs.card);        
+            
+            // real-time validation errors on the card element.
+            this.$refs.card.addEventListener('change', function(event) {
+                
+                var self = this;
+
+                if (event.error) {
+                    self.cardErrorBeforeSubmit = event.error.message;
+                } else {
+                    self.stripeToken();
+                    self.cardErrorBeforeSubmit = '';
+                }
+            }); 
+        },
+
+        // 2. submit seleted subscription plan + card details + credentials to server
+        async register(){
+
+            this.submit = true;
+            this.loading = true;             
+            
+            let self = this;             
+
+            await stripe.createToken(card).then(function(result) {
+                if (result.error) {
+                    // Inform the customer that there was an error.
+                    self.cardErrorOnSubmit = result.error.message;
+                } else {
+                    // Send the token to your server.
+                    self.customer.stripeToken = result.token;
+                }
+            });     
+            
+            let formInput = new FormData();            
+            
+            // register
+            formInput.append('plan', self.activePlan.id);            
+            formInput.append('stripeToken', self.customer.stripeToken.id);
+            formInput.append('name', self.customer.name);
+            formInput.append('email', self.customer.email);               
+            formInput.append('password', self.customer.password);                                                          
+            formInput.append('password_confirmation', self.customer.password_confirmation);
+
+            // to server
+            axios({ method: 'post', url: '/register', data: formInput })
+            .then(() => location.reload(true))
+            .catch(error => {
+                this.errors = {}; // clear old 
+                this.errors = error.response.data.errors // pass new
+                this.deactivate = false; // stop progress indicators                 
+                this.loading = false; 
+            })                               
+        }                    
+    },  
+    // clear existing card object before new one
     beforeMount: function () {
         
         card.unmount();
@@ -74,85 +152,6 @@ export default {
         card.unmount();
         card.destroy();
         destroy()          
-    },       
-    methods: {
-        setUpStripe(){
-            // Custom Styling
-            let style = {
-                base: {
-                    color: 'black',
-                    fontSize: '17px',
-                    fontWeight: '400',
-                    fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
-                    fontSmoothing: 'antialiased',              
-                    '::placeholder': {
-                        color: '#999999'
-                    }
-                },
-                invalid: {
-                    color: '#E53A40',
-                    iconColor: '#fa755a'
-                }
-            }; 
-
-            card = elements.create('card', {style});
-            card.mount(this.$refs.card);        
-        
-            
-            // Handle real-time validation errors from the card Element.
-            this.$refs.card.addEventListener('change', function(event) {
-                var self = this;
-                if (event.error) {
-                    self.cardFormError = event.error.message;
-                } else {
-                    self.stripeToken();
-                    self.cardFormError = '';
-                }
-            }); 
-        },
-        // on submit
-        async register(){
-            
-            this.deactivate = true;
-            this.loading = true;             
-            
-            let self = this;
-            
-                this.planerror = false 
-                await stripe.createToken(card).then(function(result) {
-                    if (result.error) {
-                        // Inform the customer that there was an error.
-                        self.cardError = result.error.message;
-                    } else {
-                        // Send the token to your server.
-                        self.customer.stripeToken = result.token;
-                    }
-                });     
-                
-                let formInput = new FormData();            
-                
-                // register
-                formInput.append('plan', self.customer.activePlan.id);            
-                formInput.append('stripeToken', self.customer.stripeToken.id);
-                formInput.append('name', self.customer.name);
-                formInput.append('email', self.customer.email);               
-                formInput.append('password', self.customer.password);                                                          
-                formInput.append('password_confirmation', self.customer.password_confirmation);
-
-                // to server
-                axios({
-                    method: 'post',
-                    url: '/register',
-                    data: formInput
-                })
-                .then(() => location.reload(true))
-                .catch(error => {
-                    this.errors = {}; // clear old 
-                    this.errors = error.response.data.errors // pass new
-                    this.deactivate = false; // stop progress indicators                 
-                    this.loading = false; 
-                })                               
-        }                    
-    },             
+    }               
 }
 </script>

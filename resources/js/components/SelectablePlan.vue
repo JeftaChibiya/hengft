@@ -1,5 +1,5 @@
 <template>
-    <div class="w-34 h-34 sm:w-40 sm:h-40 mr-4 bg-white rounded-lg white-box-shadow p-1 sm:p-4 pt-6 sm:pt-6 cursor-pointer border border-white hover:border-blue-400 focus:outline-none relative" :class="[this.activePlan === plan ? 'border-blue-400': '', submitted ? 'opacity-50 cursor-not-allowed': '']" @click="updateActivePlan" tabindex="0">
+    <div class="w-34 h-34 sm:w-40 sm:h-40 mr-4 bg-white rounded-lg white-box-shadow p-1 sm:p-4 pt-6 sm:pt-6 cursor-pointer border border-white hover:border-blue-400 focus:outline-none relative" :class="[this.activePlan === plan ? 'border-blue-400': '', submit ? 'opacity-50 cursor-not-allowed': '']" @click="updateActivePlan" tabindex="0">
       
       <div class="mx-auto rounded-full p-1 mt-1 w-auto text-xs font-light text-gray-800 text-center font-sans">
         <b>{{ plan.trial_period_days }} DAYS</b> FREE, THEN
@@ -29,7 +29,7 @@
 
 <script>
 export default {
-    props: ['plan', 'activePlan', 'submitted'],
+    props: ['plan', 'activePlan', 'submit'],
     data () {
       return {
 
@@ -41,7 +41,7 @@ export default {
     },    
     methods: {
       updateActivePlan() {
-        if(!this.submitted){
+        if(!this.submit){
           this.$emit('onUpdatePlan', this.plan);         
         }       
       }

@@ -3,6 +3,9 @@
 
 require('./bootstrap');
 
+import Turbolinks from 'turbolinks';
+Turbolinks.start();
+
 import { store } from './store/store'
 import router from './router';
 
