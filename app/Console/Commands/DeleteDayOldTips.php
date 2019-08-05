@@ -2,9 +2,9 @@
 
 namespace App\Console\Commands;
 
-use DB;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\DB;
 
 
 /** 
@@ -52,7 +52,7 @@ class DeleteDayOldTips extends Command
     public function handle()
     {
         // remove pre-match tips older than today
-        DB::table('tips')->where('match_date', '<', Carbon::today())->delete();
+        DB::table('tips')->where('created_at', '<', Carbon::today())->delete();
 
         // remove inplay tips older than today
         DB::table('inplaytips')->where('created_at', '<', Carbon::today())->delete();        
