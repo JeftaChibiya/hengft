@@ -1,14 +1,14 @@
 <template>
-    <div class="w-32 h-32 sm:w-34 sm:h-34 mr-6 bg-white rounded-lg relative heavy-box-shadow p-1 sm:p-4 pt-6 sm:pt-6 cursor-pointer border border-white hover:border-blue-400 focus:outline-none relative" :class="[this.activePlan === plan ? 'border-blue-400': '', submitted ? 'opacity-50 cursor-not-allowed': '']" @click="updateActivePlan" tabindex="0">
-      <div class="flex flex-col items-center mt-4 mb-6">
-        <p class="text-xl sm:text-3xl tracking-wide font-bold text-blue-600">
+    <div class="w-38 h-38 sm:w-40 sm:h-40 mr-6 bg-white rounded-lg heavy-box-shadow p-1 sm:p-4 pt-6 sm:pt-6 cursor-pointer border border-white hover:border-blue-400 focus:outline-none relative" :class="[this.activePlan === plan ? 'border-blue-400': '', submitted ? 'opacity-50 cursor-not-allowed': '']" @click="updateActivePlan" tabindex="0">
+      <div class="flex flex-col items-center mt-3 mb-6">
+        <p class="text-2xl sm:text-3xl tracking-wide font-bold text-blue-600">
           <span class="text-lg">£</span>{{ plan.amount / 100 }}                
         </p>                                 
       </div> 
       <h1 class="text-center uppercase text-xs tracking-wide font-bold text-gray-800 mb-1">
         {{ plan.nickname }}                
       </h1>    
-      <div v-if="plan.plan_id === this.currentPlan.plan_id" class="mx-auto w-1/2 text-center bg-gray-600 rounded-full text-xs p-1 px-2 font-bold text-gray-100">
+      <div v-if="plan.plan_id === this.currentPlan.plan_id" class="mx-auto w-1/2 text-center bg-gray-600 rounded-full text-xs px-2 font-bold text-gray-100">
         current
       </div>
       <transition name="fade">

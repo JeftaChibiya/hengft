@@ -116,8 +116,8 @@
                         
                         <!-- submit button: deactivate until all fields filled in + show loading spinner + deactivate on submit -->
                         <button class="flex justify-center items-center tracking-wide font-bold text-md mt-6 bg-gray-600 rounded-full p-4 w-full text-white focus:outline-none" 
-                                :class="[loading ? 'loader': '', submit || !isDeactive ? 'bg-gray-600 opacity-50 cursor-not-allowed': 'bg-blue-500']" style="transition: .5s" type="submit" id="payment-btn" 
-                                :disabled="!isDeactive"> 
+                                :class="[loading ? 'loader': '', submit || deactivate || !isDeactive ? 'bg-gray-600 opacity-50 cursor-not-allowed': 'bg-blue-500']" style="transition: .5s" type="submit" id="payment-btn" 
+                                :disabled="!isDeactive || deactivate"> 
                             CREATE ACCOUNT 
                         </button>                                                                                                                        
                     </form>   

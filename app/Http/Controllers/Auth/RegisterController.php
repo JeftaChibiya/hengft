@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Auth;
 /** Essential custom classes  */
 use App\User;
 use Carbon\Carbon;
-use Stripe\Error\Card; // Stripe Card object
+use Stripe\Error\Card as CardExpection; // Stripe Card object
 use App\LocalStripePlan;
 
 
@@ -101,43 +101,45 @@ class RegisterController extends Controller
     public function register(Request $request)
     {
         $this->validator($request->all())->validate();                
+  
 
-        try {      
+        /** only run if token exists */      
 
-            event(new Registered($user = $this->create($request->all())));
+            try {      
+                    event(new Registered($user = $this->create($request->all())));     
+        
+                    // stripe payment token from the request / card object
+                    $token = request('stripeToken'); 
 
-            // stripe payment token from the request / card object
-            $token = request('stripeToken');        
-    
-            // find corresponding subscription plan in Db
-            $selectPlan = LocalStripePlan::find(request('plan')); 
+                    // find corresponding subscription plan in Db
+                    $selectPlan = LocalStripePlan::find(request('plan')); 
+        
+                    
+                    // create stripe user, start trial, no payment taken
+                    $user->newSubscription('main', $selectPlan->plan_id)
+                            ->trialUntil(Carbon::now()->addDays($selectPlan->trial_period_days))               
+                            ->create($token,['name' =>  $user->name, 'email' => $user->email
+                    ]);                         
+        
+        
+                    // login user
+                    $this->guard()->login($user);                       
+        
+                    return $this->registered($request, $user) ?: redirect($this->redirectPath());  
 
-            
-            // create stripe user, start trial, no payment taken
-            $user->newSubscription('main', $selectPlan->plan_id)
-                    ->trialUntil(Carbon::now()->addDays($selectPlan->trial_period_days))               
-                    ->create($token,['name' =>  $user->name, 'email' => $user->email
-            ]);                         
+            } 
+            /** Errors related to selected plan or credentials */
+            catch (Exception $e) {
+                
+                return back()->with($e->getMessage());
 
+            }  
+            /** Errors related to Stripe card */        
+            catch (CardExpection $e) {
+                
+                return back()->with($e->getJsonBody());         
 
-            // login user
-            $this->guard()->login($user);                       
-
-            return $this->registered($request, $user) ?: redirect($this->redirectPath());       
-
-        } 
-        /** Errors related to selected plan or credentials */
-        catch (Exception $e) {
-            
-            return back()->with($e->getMessage());
-
-        }  
-        /** Errors related to Stripe card */        
-        catch (Card $e) {
-            
-            return back()->with($e->getJsonBody());         
-
-        }                                 
+            }                             
     }    
 
 

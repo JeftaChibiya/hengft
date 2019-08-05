@@ -97,19 +97,18 @@ export default {
         },
 
         // 2. submit seleted subscription plan + card details + credentials to server
-        async register(){
-
-            this.submit = true;    
-            this.deactivate = true;
-            this.loading = true;             
+        async register(){           
             
             let self = this;             
 
             await stripe.createToken(card).then(function(result) {
-                if (result.error) {
+                if (result.error) {     
+                    self.deactivate = true;                                       
                     // Inform the customer that there was an error.
-                    self.cardErrorOnSubmit = result.error.message;
+                    self.cardErrorOnSubmit = result.error.message;                
                 } else {
+                    self.submit = true;    
+                    self.loading = true;                      
                     // Send the token to your server.
                     self.stripeToken = result.token;
                 }

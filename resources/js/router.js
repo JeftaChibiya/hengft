@@ -74,8 +74,11 @@ const router = new VueRouter({
         {               
           path: '/password/reset',
           meta: {title: 'HengFT | Forgot Password'}                                        
-        }                   
-
+        },   
+        {               
+          path: '/email/verify',
+          meta: {title: 'HengFT | Verify Email Address'}                                        
+        }           
     ]
     
 });
