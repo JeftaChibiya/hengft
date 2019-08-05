@@ -2,10 +2,9 @@
     {{-- Header --}}
     @slot('header')
         @component('mail::header', ['url' => config('app.url')])  
-            <img src="https://www.dropbox.com/s/rbplqq3sjfzpqqx/heng_social.png?raw=1"
+            <img src="https://www.dropbox.com/s/knrongla8f6tr24/heng_logo.png?raw=1"
                  style="width: 160px" 
-                 alt="{{ config('app.name') }}">
-                 <!-- ![{{ config('app.name') }}]('https://www.dropbox.com/s/rbplqq3sjfzpqqx/heng_social.png?raw=1')                   -->
+                 alt="{{ config('app.name') }}">                
         @endcomponent
     @endslot
 
