@@ -38,7 +38,7 @@
         <div class="lg:p-10 bg-transparent py-2">
             <ul class="flex list-reset justify-around font-light flex-col text-md text-gray-200">             
                 <li class="mb-2">
-                    <a href="/help/hengft" class="hover:text-grey-light no-underline mb-3">FAQ</a>
+                    <a href="/help/what-is-hengft" class="hover:text-grey-light no-underline mb-3">FAQ</a>
                 </li>                  
                 <li class="mb-2">
                     <a href="/help" class="hover:text-grey-light no-underline mb-3">Help Center</a>

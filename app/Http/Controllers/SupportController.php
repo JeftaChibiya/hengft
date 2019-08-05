@@ -19,7 +19,7 @@ class SupportController extends Controller
     public function help()
     {
         
-        return view('help');
+        return view('site.help');
 
     } 
 
@@ -30,7 +30,7 @@ class SupportController extends Controller
     public function contact()
     {
         
-        return view('contact');
+        return view('site.contact');
 
     } 
     
