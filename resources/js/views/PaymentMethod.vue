@@ -57,7 +57,7 @@
 </template>
 
 <script>
-let stripe = Stripe('pk_test_mn0CWCCbMqesOBIi2HIghwjx00TQqq0vDt'),
+let stripe = Stripe('pk_live_4wktgZA6yJrZU4beXGCoXXdE00qmn1gR6N'),
     elements = stripe.elements(),
     card = undefined;
 

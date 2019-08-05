@@ -4,7 +4,7 @@
 @section('content')
 
 <login inline-template>
-    <div class="container px-10 sm:px-24 pt-8 sm:pt-12">
+    <div class="container mx-auto px-10 sm:px-24 pt-8 sm:pt-12">
 
         <div class="flex flex-col justify-center items-center text-gray-300">
             <p class="self-center sm:text-3xl text-3xl lg:text-4xl font-sans leading-normal font-medium mb-8">Welcome Back!</p>                
