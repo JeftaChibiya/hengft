@@ -15,15 +15,17 @@ export default {
     data () {
       return {
         errors: {},  
-        planError: {},        
-        activePlan: {},                                
+        showPlanError: false,
+        planError: 'Please select a subscription plan',        
+        activePlan: {},      
+        stripeToken: '',                                   
         loading: false, 
-        submit: false,             
+        submit: false,
+        deactivate: true,                     
         cardErrorOnSubmit: '',                  
         cardErrorBeforeSubmit: '',          
 
-        customer: {                        
-          stripeToken: '',        
+        customer: {                               
           name: '',
           email: '',
           password: '',
@@ -38,21 +40,23 @@ export default {
     watch: {
         // no plan has been selected and form submitted
         activePlan(){
-            if(this.activePlan.length < 1 && this.deactivate){
-                this.planError = true
+            if(this.activePlan.length === 0 && Object.keys(this.customer).length === 1) {
+                this.showPlanError = true
             }
-        }
+        },
     },
-    computed: {               
+    computed: {          
         isDeactive: function(){
-          return 
-            this.activePlan.length > 0 &&
-            this.customer.name &&
-            this.customer.email &&
-            this.customer.password && 
-            this.customer.password_confirmation                                        
+          if(Object.keys(this.activePlan).length && this.customer.name && this.customer.email && this.customer.password && this.customer.password_confirmation){
+
+              return true
+
+          }   
+          else{
+              return false
+          }                                     
         }
-    },             
+    },                  
     methods: {
 
         // 1. set up stripe elements
@@ -80,8 +84,7 @@ export default {
             card.mount(this.$refs.card);        
             
             // real-time validation errors on the card element.
-            this.$refs.card.addEventListener('change', function(event) {
-                
+            this.$refs.card.addEventListener('change', function(event) {                
                 var self = this;
 
                 if (event.error) {
@@ -96,7 +99,8 @@ export default {
         // 2. submit seleted subscription plan + card details + credentials to server
         async register(){
 
-            this.submit = true;
+            this.submit = true;    
+            this.deactivate = true;
             this.loading = true;             
             
             let self = this;             
@@ -107,7 +111,7 @@ export default {
                     self.cardErrorOnSubmit = result.error.message;
                 } else {
                     // Send the token to your server.
-                    self.customer.stripeToken = result.token;
+                    self.stripeToken = result.token;
                 }
             });     
             
@@ -115,7 +119,8 @@ export default {
             
             // register
             formInput.append('plan', self.activePlan.id);            
-            formInput.append('stripeToken', self.customer.stripeToken.id);
+            formInput.append('stripeToken', self.stripeToken.id);
+
             formInput.append('name', self.customer.name);
             formInput.append('email', self.customer.email);               
             formInput.append('password', self.customer.password);                                                          
@@ -127,6 +132,7 @@ export default {
             .catch(error => {
                 this.errors = {}; // clear old 
                 this.errors = error.response.data.errors // pass new
+                this.submit = false;                  
                 this.deactivate = false; // stop progress indicators                 
                 this.loading = false; 
             })                               

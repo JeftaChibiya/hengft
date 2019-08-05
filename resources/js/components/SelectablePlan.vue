@@ -1,17 +1,19 @@
 <template>
-    <div class="w-34 h-34 sm:w-40 sm:h-40 mr-4 bg-white rounded-lg white-box-shadow p-1 sm:p-4 pt-6 sm:pt-6 cursor-pointer border border-white hover:border-blue-400 focus:outline-none relative" :class="[this.activePlan === plan ? 'border-blue-400': '', submit ? 'opacity-50 cursor-not-allowed': '']" @click="updateActivePlan" tabindex="0">
+    <div class="w-35 h-35 sm:w-38 sm:h-38 p-1 pt-6 mr-4 bg-white border border-white hover:border-blue-400 focus:outline-none relative rounded-lg white-box-shadow cursor-pointer" :class="[this.activePlan === plan ? 'border-blue-400': '', deactivate ? 'opacity-50 cursor-not-allowed': '']" @click="updateActivePlan" tabindex="0">
       
       <div class="mx-auto rounded-full p-1 mt-1 w-auto text-xs font-light text-gray-800 text-center font-sans">
         <b>{{ plan.trial_period_days }} DAYS</b> FREE, THEN
       </div>
+
       <div class="flex flex-col items-center">
-        <h1 class="text-xl sm:text-3xl tracking-wide font-bold text-blue-600">
+        <h1 class="text-2xl sm:text-3xl tracking-wide font-bold text-blue-600 mt-2 mb-4 sm:mb-3">
           <span class="text-lg">£</span>{{ plan.amount / 100 }}                
         </h1>
-        <h1 class="text-center uppercase text-xs tracking-wide font-bold text-gray-800">
+        <h1 class="text-center uppercase text-xs tracking-wide font-bold text-gray-700">
           {{ plan.nickname }}                
         </h1>                                         
       </div>       
+
       <transition name="fade">
           <div v-if="this.activePlan === plan">
             <svg class="absolute top-0 right-0 mr-2 mt-1" width="23px" height="23px" viewBox="0 0 200 200" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -29,7 +31,7 @@
 
 <script>
 export default {
-    props: ['plan', 'activePlan', 'submit'],
+    props: ['plan', 'activePlan', 'deactivate'],
     data () {
       return {
 
@@ -41,7 +43,7 @@ export default {
     },    
     methods: {
       updateActivePlan() {
-        if(!this.submit){
+        if(!this.deactivate){
           this.$emit('onUpdatePlan', this.plan);         
         }       
       }

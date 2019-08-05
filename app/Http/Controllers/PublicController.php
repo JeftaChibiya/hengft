@@ -2,8 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Tip;
 use App\Faq;
+use Carbon\Carbon;
+use App\InplayTip;
+
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 
 // 30.07.2019
 // JC
@@ -72,5 +78,29 @@ class PublicController extends Controller
         return view('site.what-now');
 
     }     
+
+
+    /**   API    */
+
+
+    //
+    public function tipsAPI()
+    {   
+
+        $todaysTips = Tip::whereDate('created_at', Carbon::today())->get();
+
+        return ['todaysTips' => $todaysTips];
+
+    }
+
+
+    // 
+    public function inplayAPI()
+    {   
+        $inplaytips = Inplaytip::whereDate('created_at', Carbon::today())->get();
+
+        return ['inplaytips' => $inplaytips];
+
+    } 
 
 }

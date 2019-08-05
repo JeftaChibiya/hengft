@@ -29,12 +29,11 @@
     </div>
 @stop
 
-<tips inline-template v-cloak>
+<pre-match-tips inline-template v-cloak>
     <div class="container mx-auto px-5 sm:px-16 pb-8"> 
 
         <!-- only div: if no tips exist -->
         <div v-if="!todaysTips.length" class="pt-20 pb-20 lg:text-xl text-center font-bold text-gray-600">
-            <scale-loader></scale-loader>
             <p class="text-2xl sm:text-3xl font-light text-gray-800 mb-8 text-center">Pre-game tips on the way. Stay Tuned</p>                
 
             <p class="text-lg sm:text-lg font-light text-gray-600 leading-normal mb-3 mt-6">
@@ -96,6 +95,6 @@
         </div> 
 
     </div>                
-</tips>
+</pre-match-tips>
 
 @endsection

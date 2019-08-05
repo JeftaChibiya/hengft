@@ -10,7 +10,9 @@
         @include('partials.signup_reminder')          
         <!-- 1. rgb(45, 85, 151), rgb(23, 57, 147) linear-gradient(180deg,rgb(55, 81, 128) -->
         <div style="height: 100vh; background: linear-gradient(180deg, rgb(38, 76, 137), rgb(38, 69, 137))"> 
+            
             @include('partials.navbar_white')
+
            <div class="mx-auto px-5 sm:px-16">
                 @include('partials.home-banner')
            </div> 

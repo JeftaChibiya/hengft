@@ -24,12 +24,11 @@
     </div>
 @stop
 
-<inplay inline-template v-cloak>
+<inplay-tips inline-template v-cloak>
     <div class="container mx-auto sm:px-16 px-5 pb-10">
         
         <!-- only div: if no tips exist -->
         <div v-if="!inplaytips.length" class="pt-20 pb-20 lg:text-xl text-center font-bold text-gray-600">
-            <scale-loader></scale-loader>
             
             <p class="text-2xl sm:text-3xl font-light text-gray-800 mb-8 text-center">Inplay tips on the way. Stay Tuned</p>                       
 
@@ -98,6 +97,6 @@
 
     </div>
 
-</inplay>
+</inplay-tips>
 
 @endsection

@@ -42,8 +42,6 @@ Route::post('/update-payment-details', 'UserSettingsController@updatePaymentDeta
 Route::get('/subscription_log', 'SettingsAPIController@SubscriptionLog');
 Route::get('/user', 'SettingsAPIController@user');
 Route::get('/invoices', 'SettingsAPIController@invoices');
-Route::get('/all-tips', 'SettingsAPIController@tips');
-Route::get('/all-inplay-tips', 'SettingsAPIController@inplayTips');
 
 // Entrance
 Route::get('/settings/{setting?}', 'UserSettingsController@index')->where('setting', '[\/\w\.-]*');
@@ -55,6 +53,8 @@ Route::get('/what-now', 'PublicController@postSubscriptionDeletion')->name('what
 Route::get('/pre-match-tips', 'PublicController@preMatchTips')->name('pre-match-tips');
 Route::get('/inplay-tips', 'PublicController@inplayTips')->name('inplay-tips');
 Route::get('/specials', 'PublicController@specials')->name('specials');
+Route::get('/all-tips', 'PublicController@tipsAPI');
+Route::get('/all-inplay-tips', 'PublicController@inplayAPI');
 
 
 // SUPPORT

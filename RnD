@@ -38,4 +38,16 @@ Route::get('test', function () {
 
     dd($users);
 
-});                
+});
+
+            // Since it's a decline, \Stripe\Error\Card will be caught
+            // $body = $e->getJsonBody();
+            // $err  = $body['error'];
+
+            // print('Status is:' . $e->getHttpStatus() . "\n");
+            // print('Type is:' . $err['type'] . "\n");
+            // print('Code is:' . $err['code'] . "\n");
+
+            // // param is '' in this case
+            // print('Param is:' . $err['param'] . "\n");
+            // print('Message is:' . $err['message'] . "\n");   

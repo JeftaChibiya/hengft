@@ -34,7 +34,7 @@
         <div class="container mx-auto px-5 p-8 sm:px-48 sm:p-10 mb-12">        
             <div class="flex flex-col pl-3"> 
                 <div class="w-full sm:w-1/2 mr-10">
-                    <form id="payment-form" @submit.prevent="register" @keydown="submit = false">
+                    <form id="payment-form" @submit.prevent="register" @keydown="deactivate = false">
 
                         <div class="mb-1">
                             <input type="hidden" id="2k1e09y" value="{{ config('services.stripe.key') }}">
@@ -47,20 +47,20 @@
                                 <!-- loop through avaiable plans + update selected plan + delete error when plan actually selected -->
                                 <selectable-plan v-for="plan in plans" :plan="plan" v-model="activePlan" :key="plan.id" @keydown="delete planError"></selectable-plan>                                                                       
                             </div> 
-                            <span v-if="planError" class="text-red-500" v-text="Please select a subscription plan"></span>                              
+                            <span v-if="showPlanError" class="text-red-500" v-text="planError"></span>                              
                         </div>    
                         
                         <!-- Card details -->
                         <div class="mb-10">
                             <p class="text-sm font-bold mb-4 text-gray-700">ADD A DEBIT/CREDIT CARD</p>                
-                            <div class="card-details mb-1 w-full">
+                            <div class="card-details mb-2 w-full">
                                 <div class="flex flex-col py-2">
-                                    <div class="flex-no-shrink w-full mb-4">
+                                    <div class="flex-no-shrink w-full mb-1">
                                         <div ref="card"></div>
                                     </div>
-                                </div>       
-                            </div>    
-                            <div v-text="cardFormError"></div>           
+                                </div>
+                                <span v-if="cardErrorOnSubmit" class="text-red-500" v-text="cardErrorOnSubmit"></span>                                        
+                            </div>                                
 
                             <div class="flex flex-row">
                                 <div>

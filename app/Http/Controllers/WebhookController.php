@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Laravel\Cashier\Http\Controllers\WebhookController as CashierController;
 
 /*** Custom mail classes ***/ 
+use App\Jobs\WelcomeSubscriber;
 use App\Mail\SubscriptionStarted;
 use App\Mail\SubscriptionPlanChanged;
 use App\Mail\PaymentMethodUpdated;
@@ -42,7 +43,7 @@ class WebhookController extends CashierController
         $user = User::where('stripe_id', $payload['data']['object']['customer'])->get();
 
         // send email confirmation as Job, delay: 3 mins
-        Mail::to($user[0])->send(new SubscriptionStarted($user[0]));
+        WelcomeSubscriber::dispatch($user[0])->delay(now()->addMinutes(2));
 
         return 'New Subscription Created';    
 

@@ -30,28 +30,7 @@ class SettingsAPIController extends Controller
     {
         $this->middleware(['auth', 'verified']);
 
-    }         
-
-  
-    //
-    public function tips()
-    {   
-
-        $todaysTips = DB::table('tips')->whereDate('created_at', Carbon::today())->get();
-
-        return ['todaysTips' => $todaysTips];
-
-    }
-
-
-    // 
-    public function inplayTips()
-    {   
-        $inplaytips = Inplaytip::whereDate('created_at', Carbon::today())->get();
-
-        return ['inplaytips' => $inplaytips];
-
-    }    
+    }            
 
 
     //

@@ -2605,14 +2605,16 @@ var stripe = Stripe('pk_test_mn0CWCCbMqesOBIi2HIghwjx00TQqq0vDt'),
   data: function data() {
     return {
       errors: {},
-      planError: {},
+      showPlanError: false,
+      planError: 'Please select a subscription plan',
       activePlan: {},
+      stripeToken: '',
       loading: false,
       submit: false,
+      deactivate: true,
       cardErrorOnSubmit: '',
       cardErrorBeforeSubmit: '',
       customer: {
-        stripeToken: '',
         name: '',
         email: '',
         password: '',
@@ -2626,15 +2628,18 @@ var stripe = Stripe('pk_test_mn0CWCCbMqesOBIi2HIghwjx00TQqq0vDt'),
   watch: {
     // no plan has been selected and form submitted
     activePlan: function activePlan() {
-      if (this.activePlan.length < 1 && this.deactivate) {
-        this.planError = true;
+      if (this.activePlan.length === 0 && Object.keys(this.customer).length === 1) {
+        this.showPlanError = true;
       }
     }
   },
   computed: {
     isDeactive: function isDeactive() {
-      return;
-      this.activePlan.length > 0 && this.customer.name && this.customer.email && this.customer.password && this.customer.password_confirmation;
+      if (Object.keys(this.activePlan).length && this.customer.name && this.customer.email && this.customer.password && this.customer.password_confirmation) {
+        return true;
+      } else {
+        return false;
+      }
     }
   },
   methods: {
@@ -2688,24 +2693,25 @@ var stripe = Stripe('pk_test_mn0CWCCbMqesOBIi2HIghwjx00TQqq0vDt'),
             switch (_context.prev = _context.next) {
               case 0:
                 this.submit = true;
+                this.deactivate = true;
                 this.loading = true;
                 self = this;
-                _context.next = 5;
+                _context.next = 6;
                 return stripe.createToken(card).then(function (result) {
                   if (result.error) {
                     // Inform the customer that there was an error.
                     self.cardErrorOnSubmit = result.error.message;
                   } else {
                     // Send the token to your server.
-                    self.customer.stripeToken = result.token;
+                    self.stripeToken = result.token;
                   }
                 });
 
-              case 5:
+              case 6:
                 formInput = new FormData(); // register
 
                 formInput.append('plan', self.activePlan.id);
-                formInput.append('stripeToken', self.customer.stripeToken.id);
+                formInput.append('stripeToken', self.stripeToken.id);
                 formInput.append('name', self.customer.name);
                 formInput.append('email', self.customer.email);
                 formInput.append('password', self.customer.password);
@@ -2722,12 +2728,13 @@ var stripe = Stripe('pk_test_mn0CWCCbMqesOBIi2HIghwjx00TQqq0vDt'),
 
                   _this.errors = error.response.data.errors; // pass new
 
+                  _this.submit = false;
                   _this.deactivate = false; // stop progress indicators                 
 
                   _this.loading = false;
                 });
 
-              case 13:
+              case 14:
               case "end":
                 return _context.stop();
             }
@@ -2799,8 +2806,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['plan', 'activePlan', 'submit'],
+  props: ['plan', 'activePlan', 'deactivate'],
   data: function data() {
     return {};
   },
@@ -2810,7 +2819,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     updateActivePlan: function updateActivePlan() {
-      if (!this.submit) {
+      if (!this.deactivate) {
         this.$emit('onUpdatePlan', this.plan);
       }
     }
@@ -59984,10 +59993,10 @@ var render = function() {
     "div",
     {
       staticClass:
-        "w-34 h-34 sm:w-40 sm:h-40 mr-4 bg-white rounded-lg white-box-shadow p-1 sm:p-4 pt-6 sm:pt-6 cursor-pointer border border-white hover:border-blue-400 focus:outline-none relative",
+        "w-35 h-35 sm:w-38 sm:h-38 p-1 pt-6 mr-4 bg-white border border-white hover:border-blue-400 focus:outline-none relative rounded-lg white-box-shadow cursor-pointer",
       class: [
         this.activePlan === _vm.plan ? "border-blue-400" : "",
-        _vm.submit ? "opacity-50 cursor-not-allowed" : ""
+        _vm.deactivate ? "opacity-50 cursor-not-allowed" : ""
       ],
       attrs: { tabindex: "0" },
       on: { click: _vm.updateActivePlan }
@@ -60010,7 +60019,7 @@ var render = function() {
           "h1",
           {
             staticClass:
-              "text-xl sm:text-3xl tracking-wide font-bold text-blue-600"
+              "text-2xl sm:text-3xl tracking-wide font-bold text-blue-600 mt-2 mb-4 sm:mb-3"
           },
           [
             _c("span", { staticClass: "text-lg" }, [_vm._v("£")]),
@@ -60022,7 +60031,7 @@ var render = function() {
           "h1",
           {
             staticClass:
-              "text-center uppercase text-xs tracking-wide font-bold text-gray-800"
+              "text-center uppercase text-xs tracking-wide font-bold text-gray-700"
           },
           [
             _vm._v(

@@ -119,13 +119,11 @@ class RegisterController extends Controller
                     ->create($token,['name' =>  $user->name, 'email' => $user->email
             ]);                         
 
-            // login user
-            $this->guard()->login($user);
 
-            // redirect
-            return $this->registered($request, $user)
-                         ?: redirect($this->redirectPath())
-                         ->with('flash', 'Welcome To Hengft!');         
+            // login user
+            $this->guard()->login($user);                       
+
+            return $this->registered($request, $user) ?: redirect($this->redirectPath());       
 
         } 
         /** Errors related to selected plan or credentials */
@@ -137,20 +135,24 @@ class RegisterController extends Controller
         /** Errors related to Stripe card */        
         catch (Card $e) {
             
-            return back()->with($e->getJsonBody());
-
-            // Since it's a decline, \Stripe\Error\Card will be caught
-            // $body = $e->getJsonBody();
-            // $err  = $body['error'];
-
-            // print('Status is:' . $e->getHttpStatus() . "\n");
-            // print('Type is:' . $err['type'] . "\n");
-            // print('Code is:' . $err['code'] . "\n");
-
-            // // param is '' in this case
-            // print('Param is:' . $err['param'] . "\n");
-            // print('Message is:' . $err['message'] . "\n");            
+            return back()->with($e->getJsonBody());         
 
         }                                 
     }    
+
+
+    /**
+     * The user has been registered.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  mixed  $user
+     * @return mixed
+     */
+    protected function registered(Request $request, $user)
+    {
+        
+        
+        
+    }
+
 }

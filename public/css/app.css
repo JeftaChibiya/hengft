@@ -3827,6 +3827,14 @@ video {
   height: 8rem;
 }
 
+.h-35{
+  height: 9.3rem;
+}
+
+.h-38{
+  height: 9.5rem;
+}
+
 .h-40{
   height: 10rem;
 }
@@ -3959,6 +3967,14 @@ video {
   margin: 8rem;
 }
 
+.m-35{
+  margin: 9.3rem;
+}
+
+.m-38{
+  margin: 9.5rem;
+}
+
 .m-40{
   margin: 10rem;
 }
@@ -4033,6 +4049,14 @@ video {
 
 .-m-32{
   margin: -8rem;
+}
+
+.-m-35{
+  margin: -9.3rem;
+}
+
+.-m-38{
+  margin: -9.5rem;
 }
 
 .-m-40{
@@ -4193,6 +4217,26 @@ video {
 .mx-32{
   margin-left: 8rem;
   margin-right: 8rem;
+}
+
+.my-35{
+  margin-top: 9.3rem;
+  margin-bottom: 9.3rem;
+}
+
+.mx-35{
+  margin-left: 9.3rem;
+  margin-right: 9.3rem;
+}
+
+.my-38{
+  margin-top: 9.5rem;
+  margin-bottom: 9.5rem;
+}
+
+.mx-38{
+  margin-left: 9.5rem;
+  margin-right: 9.5rem;
 }
 
 .my-40{
@@ -4383,6 +4427,26 @@ video {
 .-mx-32{
   margin-left: -8rem;
   margin-right: -8rem;
+}
+
+.-my-35{
+  margin-top: -9.3rem;
+  margin-bottom: -9.3rem;
+}
+
+.-mx-35{
+  margin-left: -9.3rem;
+  margin-right: -9.3rem;
+}
+
+.-my-38{
+  margin-top: -9.5rem;
+  margin-bottom: -9.5rem;
+}
+
+.-mx-38{
+  margin-left: -9.5rem;
+  margin-right: -9.5rem;
 }
 
 .-my-40{
@@ -4657,6 +4721,38 @@ video {
 
 .ml-32{
   margin-left: 8rem;
+}
+
+.mt-35{
+  margin-top: 9.3rem;
+}
+
+.mr-35{
+  margin-right: 9.3rem;
+}
+
+.mb-35{
+  margin-bottom: 9.3rem;
+}
+
+.ml-35{
+  margin-left: 9.3rem;
+}
+
+.mt-38{
+  margin-top: 9.5rem;
+}
+
+.mr-38{
+  margin-right: 9.5rem;
+}
+
+.mb-38{
+  margin-bottom: 9.5rem;
+}
+
+.ml-38{
+  margin-left: 9.5rem;
 }
 
 .mt-40{
@@ -4961,6 +5057,38 @@ video {
 
 .-ml-32{
   margin-left: -8rem;
+}
+
+.-mt-35{
+  margin-top: -9.3rem;
+}
+
+.-mr-35{
+  margin-right: -9.3rem;
+}
+
+.-mb-35{
+  margin-bottom: -9.3rem;
+}
+
+.-ml-35{
+  margin-left: -9.3rem;
+}
+
+.-mt-38{
+  margin-top: -9.5rem;
+}
+
+.-mr-38{
+  margin-right: -9.5rem;
+}
+
+.-mb-38{
+  margin-bottom: -9.5rem;
+}
+
+.-ml-38{
+  margin-left: -9.5rem;
 }
 
 .-mt-40{
@@ -5325,6 +5453,14 @@ video {
   padding: 8rem;
 }
 
+.p-35{
+  padding: 9.3rem;
+}
+
+.p-38{
+  padding: 9.5rem;
+}
+
 .p-40{
   padding: 10rem;
 }
@@ -5483,6 +5619,26 @@ video {
 .px-32{
   padding-left: 8rem;
   padding-right: 8rem;
+}
+
+.py-35{
+  padding-top: 9.3rem;
+  padding-bottom: 9.3rem;
+}
+
+.px-35{
+  padding-left: 9.3rem;
+  padding-right: 9.3rem;
+}
+
+.py-38{
+  padding-top: 9.5rem;
+  padding-bottom: 9.5rem;
+}
+
+.px-38{
+  padding-left: 9.5rem;
+  padding-right: 9.5rem;
 }
 
 .py-40{
@@ -5757,6 +5913,38 @@ video {
 
 .pl-32{
   padding-left: 8rem;
+}
+
+.pt-35{
+  padding-top: 9.3rem;
+}
+
+.pr-35{
+  padding-right: 9.3rem;
+}
+
+.pb-35{
+  padding-bottom: 9.3rem;
+}
+
+.pl-35{
+  padding-left: 9.3rem;
+}
+
+.pt-38{
+  padding-top: 9.5rem;
+}
+
+.pr-38{
+  padding-right: 9.5rem;
+}
+
+.pb-38{
+  padding-bottom: 9.5rem;
+}
+
+.pl-38{
+  padding-left: 9.5rem;
 }
 
 .pt-40{
@@ -7531,6 +7719,14 @@ video {
   width: 8rem;
 }
 
+.w-35{
+  width: 9.3rem;
+}
+
+.w-38{
+  width: 9.5rem;
+}
+
 .w-40{
   width: 10rem;
 }
@@ -7973,6 +8169,32 @@ button {
 
 .division {
   border-top: 1px solid #262626;
+}
+
+/**
+ * The CSS shown here will not be introduced in the Quickstart guide, but shows
+ * how you can use CSS to style your Element's container.
+ */
+
+.StripeElement {
+  box-sizing: border-box;
+  height: 40px;
+  padding: 10px;
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+  background-color: white;
+}
+
+.StripeElement--focus {
+  box-shadow: none;
+}
+
+.StripeElement--invalid {
+  border-color: #fa755a;
+}
+
+.StripeElement--webkit-autofill {
+  background-color: #fefde5 !important;
 }
 
 @media (min-width: 640px){
@@ -11176,6 +11398,14 @@ button {
     height: 8rem;
   }
 
+  .sm\:h-35{
+    height: 9.3rem;
+  }
+
+  .sm\:h-38{
+    height: 9.5rem;
+  }
+
   .sm\:h-40{
     height: 10rem;
   }
@@ -11308,6 +11538,14 @@ button {
     margin: 8rem;
   }
 
+  .sm\:m-35{
+    margin: 9.3rem;
+  }
+
+  .sm\:m-38{
+    margin: 9.5rem;
+  }
+
   .sm\:m-40{
     margin: 10rem;
   }
@@ -11382,6 +11620,14 @@ button {
 
   .sm\:-m-32{
     margin: -8rem;
+  }
+
+  .sm\:-m-35{
+    margin: -9.3rem;
+  }
+
+  .sm\:-m-38{
+    margin: -9.5rem;
   }
 
   .sm\:-m-40{
@@ -11542,6 +11788,26 @@ button {
   .sm\:mx-32{
     margin-left: 8rem;
     margin-right: 8rem;
+  }
+
+  .sm\:my-35{
+    margin-top: 9.3rem;
+    margin-bottom: 9.3rem;
+  }
+
+  .sm\:mx-35{
+    margin-left: 9.3rem;
+    margin-right: 9.3rem;
+  }
+
+  .sm\:my-38{
+    margin-top: 9.5rem;
+    margin-bottom: 9.5rem;
+  }
+
+  .sm\:mx-38{
+    margin-left: 9.5rem;
+    margin-right: 9.5rem;
   }
 
   .sm\:my-40{
@@ -11732,6 +11998,26 @@ button {
   .sm\:-mx-32{
     margin-left: -8rem;
     margin-right: -8rem;
+  }
+
+  .sm\:-my-35{
+    margin-top: -9.3rem;
+    margin-bottom: -9.3rem;
+  }
+
+  .sm\:-mx-35{
+    margin-left: -9.3rem;
+    margin-right: -9.3rem;
+  }
+
+  .sm\:-my-38{
+    margin-top: -9.5rem;
+    margin-bottom: -9.5rem;
+  }
+
+  .sm\:-mx-38{
+    margin-left: -9.5rem;
+    margin-right: -9.5rem;
   }
 
   .sm\:-my-40{
@@ -12006,6 +12292,38 @@ button {
 
   .sm\:ml-32{
     margin-left: 8rem;
+  }
+
+  .sm\:mt-35{
+    margin-top: 9.3rem;
+  }
+
+  .sm\:mr-35{
+    margin-right: 9.3rem;
+  }
+
+  .sm\:mb-35{
+    margin-bottom: 9.3rem;
+  }
+
+  .sm\:ml-35{
+    margin-left: 9.3rem;
+  }
+
+  .sm\:mt-38{
+    margin-top: 9.5rem;
+  }
+
+  .sm\:mr-38{
+    margin-right: 9.5rem;
+  }
+
+  .sm\:mb-38{
+    margin-bottom: 9.5rem;
+  }
+
+  .sm\:ml-38{
+    margin-left: 9.5rem;
   }
 
   .sm\:mt-40{
@@ -12310,6 +12628,38 @@ button {
 
   .sm\:-ml-32{
     margin-left: -8rem;
+  }
+
+  .sm\:-mt-35{
+    margin-top: -9.3rem;
+  }
+
+  .sm\:-mr-35{
+    margin-right: -9.3rem;
+  }
+
+  .sm\:-mb-35{
+    margin-bottom: -9.3rem;
+  }
+
+  .sm\:-ml-35{
+    margin-left: -9.3rem;
+  }
+
+  .sm\:-mt-38{
+    margin-top: -9.5rem;
+  }
+
+  .sm\:-mr-38{
+    margin-right: -9.5rem;
+  }
+
+  .sm\:-mb-38{
+    margin-bottom: -9.5rem;
+  }
+
+  .sm\:-ml-38{
+    margin-left: -9.5rem;
   }
 
   .sm\:-mt-40{
@@ -12674,6 +13024,14 @@ button {
     padding: 8rem;
   }
 
+  .sm\:p-35{
+    padding: 9.3rem;
+  }
+
+  .sm\:p-38{
+    padding: 9.5rem;
+  }
+
   .sm\:p-40{
     padding: 10rem;
   }
@@ -12832,6 +13190,26 @@ button {
   .sm\:px-32{
     padding-left: 8rem;
     padding-right: 8rem;
+  }
+
+  .sm\:py-35{
+    padding-top: 9.3rem;
+    padding-bottom: 9.3rem;
+  }
+
+  .sm\:px-35{
+    padding-left: 9.3rem;
+    padding-right: 9.3rem;
+  }
+
+  .sm\:py-38{
+    padding-top: 9.5rem;
+    padding-bottom: 9.5rem;
+  }
+
+  .sm\:px-38{
+    padding-left: 9.5rem;
+    padding-right: 9.5rem;
   }
 
   .sm\:py-40{
@@ -13106,6 +13484,38 @@ button {
 
   .sm\:pl-32{
     padding-left: 8rem;
+  }
+
+  .sm\:pt-35{
+    padding-top: 9.3rem;
+  }
+
+  .sm\:pr-35{
+    padding-right: 9.3rem;
+  }
+
+  .sm\:pb-35{
+    padding-bottom: 9.3rem;
+  }
+
+  .sm\:pl-35{
+    padding-left: 9.3rem;
+  }
+
+  .sm\:pt-38{
+    padding-top: 9.5rem;
+  }
+
+  .sm\:pr-38{
+    padding-right: 9.5rem;
+  }
+
+  .sm\:pb-38{
+    padding-bottom: 9.5rem;
+  }
+
+  .sm\:pl-38{
+    padding-left: 9.5rem;
   }
 
   .sm\:pt-40{
@@ -14878,6 +15288,14 @@ button {
 
   .sm\:w-32{
     width: 8rem;
+  }
+
+  .sm\:w-35{
+    width: 9.3rem;
+  }
+
+  .sm\:w-38{
+    width: 9.5rem;
   }
 
   .sm\:w-40{
@@ -18246,6 +18664,14 @@ button {
     height: 8rem;
   }
 
+  .md\:h-35{
+    height: 9.3rem;
+  }
+
+  .md\:h-38{
+    height: 9.5rem;
+  }
+
   .md\:h-40{
     height: 10rem;
   }
@@ -18378,6 +18804,14 @@ button {
     margin: 8rem;
   }
 
+  .md\:m-35{
+    margin: 9.3rem;
+  }
+
+  .md\:m-38{
+    margin: 9.5rem;
+  }
+
   .md\:m-40{
     margin: 10rem;
   }
@@ -18452,6 +18886,14 @@ button {
 
   .md\:-m-32{
     margin: -8rem;
+  }
+
+  .md\:-m-35{
+    margin: -9.3rem;
+  }
+
+  .md\:-m-38{
+    margin: -9.5rem;
   }
 
   .md\:-m-40{
@@ -18612,6 +19054,26 @@ button {
   .md\:mx-32{
     margin-left: 8rem;
     margin-right: 8rem;
+  }
+
+  .md\:my-35{
+    margin-top: 9.3rem;
+    margin-bottom: 9.3rem;
+  }
+
+  .md\:mx-35{
+    margin-left: 9.3rem;
+    margin-right: 9.3rem;
+  }
+
+  .md\:my-38{
+    margin-top: 9.5rem;
+    margin-bottom: 9.5rem;
+  }
+
+  .md\:mx-38{
+    margin-left: 9.5rem;
+    margin-right: 9.5rem;
   }
 
   .md\:my-40{
@@ -18802,6 +19264,26 @@ button {
   .md\:-mx-32{
     margin-left: -8rem;
     margin-right: -8rem;
+  }
+
+  .md\:-my-35{
+    margin-top: -9.3rem;
+    margin-bottom: -9.3rem;
+  }
+
+  .md\:-mx-35{
+    margin-left: -9.3rem;
+    margin-right: -9.3rem;
+  }
+
+  .md\:-my-38{
+    margin-top: -9.5rem;
+    margin-bottom: -9.5rem;
+  }
+
+  .md\:-mx-38{
+    margin-left: -9.5rem;
+    margin-right: -9.5rem;
   }
 
   .md\:-my-40{
@@ -19076,6 +19558,38 @@ button {
 
   .md\:ml-32{
     margin-left: 8rem;
+  }
+
+  .md\:mt-35{
+    margin-top: 9.3rem;
+  }
+
+  .md\:mr-35{
+    margin-right: 9.3rem;
+  }
+
+  .md\:mb-35{
+    margin-bottom: 9.3rem;
+  }
+
+  .md\:ml-35{
+    margin-left: 9.3rem;
+  }
+
+  .md\:mt-38{
+    margin-top: 9.5rem;
+  }
+
+  .md\:mr-38{
+    margin-right: 9.5rem;
+  }
+
+  .md\:mb-38{
+    margin-bottom: 9.5rem;
+  }
+
+  .md\:ml-38{
+    margin-left: 9.5rem;
   }
 
   .md\:mt-40{
@@ -19380,6 +19894,38 @@ button {
 
   .md\:-ml-32{
     margin-left: -8rem;
+  }
+
+  .md\:-mt-35{
+    margin-top: -9.3rem;
+  }
+
+  .md\:-mr-35{
+    margin-right: -9.3rem;
+  }
+
+  .md\:-mb-35{
+    margin-bottom: -9.3rem;
+  }
+
+  .md\:-ml-35{
+    margin-left: -9.3rem;
+  }
+
+  .md\:-mt-38{
+    margin-top: -9.5rem;
+  }
+
+  .md\:-mr-38{
+    margin-right: -9.5rem;
+  }
+
+  .md\:-mb-38{
+    margin-bottom: -9.5rem;
+  }
+
+  .md\:-ml-38{
+    margin-left: -9.5rem;
   }
 
   .md\:-mt-40{
@@ -19744,6 +20290,14 @@ button {
     padding: 8rem;
   }
 
+  .md\:p-35{
+    padding: 9.3rem;
+  }
+
+  .md\:p-38{
+    padding: 9.5rem;
+  }
+
   .md\:p-40{
     padding: 10rem;
   }
@@ -19902,6 +20456,26 @@ button {
   .md\:px-32{
     padding-left: 8rem;
     padding-right: 8rem;
+  }
+
+  .md\:py-35{
+    padding-top: 9.3rem;
+    padding-bottom: 9.3rem;
+  }
+
+  .md\:px-35{
+    padding-left: 9.3rem;
+    padding-right: 9.3rem;
+  }
+
+  .md\:py-38{
+    padding-top: 9.5rem;
+    padding-bottom: 9.5rem;
+  }
+
+  .md\:px-38{
+    padding-left: 9.5rem;
+    padding-right: 9.5rem;
   }
 
   .md\:py-40{
@@ -20176,6 +20750,38 @@ button {
 
   .md\:pl-32{
     padding-left: 8rem;
+  }
+
+  .md\:pt-35{
+    padding-top: 9.3rem;
+  }
+
+  .md\:pr-35{
+    padding-right: 9.3rem;
+  }
+
+  .md\:pb-35{
+    padding-bottom: 9.3rem;
+  }
+
+  .md\:pl-35{
+    padding-left: 9.3rem;
+  }
+
+  .md\:pt-38{
+    padding-top: 9.5rem;
+  }
+
+  .md\:pr-38{
+    padding-right: 9.5rem;
+  }
+
+  .md\:pb-38{
+    padding-bottom: 9.5rem;
+  }
+
+  .md\:pl-38{
+    padding-left: 9.5rem;
   }
 
   .md\:pt-40{
@@ -21948,6 +22554,14 @@ button {
 
   .md\:w-32{
     width: 8rem;
+  }
+
+  .md\:w-35{
+    width: 9.3rem;
+  }
+
+  .md\:w-38{
+    width: 9.5rem;
   }
 
   .md\:w-40{
@@ -25316,6 +25930,14 @@ button {
     height: 8rem;
   }
 
+  .lg\:h-35{
+    height: 9.3rem;
+  }
+
+  .lg\:h-38{
+    height: 9.5rem;
+  }
+
   .lg\:h-40{
     height: 10rem;
   }
@@ -25448,6 +26070,14 @@ button {
     margin: 8rem;
   }
 
+  .lg\:m-35{
+    margin: 9.3rem;
+  }
+
+  .lg\:m-38{
+    margin: 9.5rem;
+  }
+
   .lg\:m-40{
     margin: 10rem;
   }
@@ -25522,6 +26152,14 @@ button {
 
   .lg\:-m-32{
     margin: -8rem;
+  }
+
+  .lg\:-m-35{
+    margin: -9.3rem;
+  }
+
+  .lg\:-m-38{
+    margin: -9.5rem;
   }
 
   .lg\:-m-40{
@@ -25682,6 +26320,26 @@ button {
   .lg\:mx-32{
     margin-left: 8rem;
     margin-right: 8rem;
+  }
+
+  .lg\:my-35{
+    margin-top: 9.3rem;
+    margin-bottom: 9.3rem;
+  }
+
+  .lg\:mx-35{
+    margin-left: 9.3rem;
+    margin-right: 9.3rem;
+  }
+
+  .lg\:my-38{
+    margin-top: 9.5rem;
+    margin-bottom: 9.5rem;
+  }
+
+  .lg\:mx-38{
+    margin-left: 9.5rem;
+    margin-right: 9.5rem;
   }
 
   .lg\:my-40{
@@ -25872,6 +26530,26 @@ button {
   .lg\:-mx-32{
     margin-left: -8rem;
     margin-right: -8rem;
+  }
+
+  .lg\:-my-35{
+    margin-top: -9.3rem;
+    margin-bottom: -9.3rem;
+  }
+
+  .lg\:-mx-35{
+    margin-left: -9.3rem;
+    margin-right: -9.3rem;
+  }
+
+  .lg\:-my-38{
+    margin-top: -9.5rem;
+    margin-bottom: -9.5rem;
+  }
+
+  .lg\:-mx-38{
+    margin-left: -9.5rem;
+    margin-right: -9.5rem;
   }
 
   .lg\:-my-40{
@@ -26146,6 +26824,38 @@ button {
 
   .lg\:ml-32{
     margin-left: 8rem;
+  }
+
+  .lg\:mt-35{
+    margin-top: 9.3rem;
+  }
+
+  .lg\:mr-35{
+    margin-right: 9.3rem;
+  }
+
+  .lg\:mb-35{
+    margin-bottom: 9.3rem;
+  }
+
+  .lg\:ml-35{
+    margin-left: 9.3rem;
+  }
+
+  .lg\:mt-38{
+    margin-top: 9.5rem;
+  }
+
+  .lg\:mr-38{
+    margin-right: 9.5rem;
+  }
+
+  .lg\:mb-38{
+    margin-bottom: 9.5rem;
+  }
+
+  .lg\:ml-38{
+    margin-left: 9.5rem;
   }
 
   .lg\:mt-40{
@@ -26450,6 +27160,38 @@ button {
 
   .lg\:-ml-32{
     margin-left: -8rem;
+  }
+
+  .lg\:-mt-35{
+    margin-top: -9.3rem;
+  }
+
+  .lg\:-mr-35{
+    margin-right: -9.3rem;
+  }
+
+  .lg\:-mb-35{
+    margin-bottom: -9.3rem;
+  }
+
+  .lg\:-ml-35{
+    margin-left: -9.3rem;
+  }
+
+  .lg\:-mt-38{
+    margin-top: -9.5rem;
+  }
+
+  .lg\:-mr-38{
+    margin-right: -9.5rem;
+  }
+
+  .lg\:-mb-38{
+    margin-bottom: -9.5rem;
+  }
+
+  .lg\:-ml-38{
+    margin-left: -9.5rem;
   }
 
   .lg\:-mt-40{
@@ -26814,6 +27556,14 @@ button {
     padding: 8rem;
   }
 
+  .lg\:p-35{
+    padding: 9.3rem;
+  }
+
+  .lg\:p-38{
+    padding: 9.5rem;
+  }
+
   .lg\:p-40{
     padding: 10rem;
   }
@@ -26972,6 +27722,26 @@ button {
   .lg\:px-32{
     padding-left: 8rem;
     padding-right: 8rem;
+  }
+
+  .lg\:py-35{
+    padding-top: 9.3rem;
+    padding-bottom: 9.3rem;
+  }
+
+  .lg\:px-35{
+    padding-left: 9.3rem;
+    padding-right: 9.3rem;
+  }
+
+  .lg\:py-38{
+    padding-top: 9.5rem;
+    padding-bottom: 9.5rem;
+  }
+
+  .lg\:px-38{
+    padding-left: 9.5rem;
+    padding-right: 9.5rem;
   }
 
   .lg\:py-40{
@@ -27246,6 +28016,38 @@ button {
 
   .lg\:pl-32{
     padding-left: 8rem;
+  }
+
+  .lg\:pt-35{
+    padding-top: 9.3rem;
+  }
+
+  .lg\:pr-35{
+    padding-right: 9.3rem;
+  }
+
+  .lg\:pb-35{
+    padding-bottom: 9.3rem;
+  }
+
+  .lg\:pl-35{
+    padding-left: 9.3rem;
+  }
+
+  .lg\:pt-38{
+    padding-top: 9.5rem;
+  }
+
+  .lg\:pr-38{
+    padding-right: 9.5rem;
+  }
+
+  .lg\:pb-38{
+    padding-bottom: 9.5rem;
+  }
+
+  .lg\:pl-38{
+    padding-left: 9.5rem;
   }
 
   .lg\:pt-40{
@@ -29018,6 +29820,14 @@ button {
 
   .lg\:w-32{
     width: 8rem;
+  }
+
+  .lg\:w-35{
+    width: 9.3rem;
+  }
+
+  .lg\:w-38{
+    width: 9.5rem;
   }
 
   .lg\:w-40{
@@ -32386,6 +33196,14 @@ button {
     height: 8rem;
   }
 
+  .xl\:h-35{
+    height: 9.3rem;
+  }
+
+  .xl\:h-38{
+    height: 9.5rem;
+  }
+
   .xl\:h-40{
     height: 10rem;
   }
@@ -32518,6 +33336,14 @@ button {
     margin: 8rem;
   }
 
+  .xl\:m-35{
+    margin: 9.3rem;
+  }
+
+  .xl\:m-38{
+    margin: 9.5rem;
+  }
+
   .xl\:m-40{
     margin: 10rem;
   }
@@ -32592,6 +33418,14 @@ button {
 
   .xl\:-m-32{
     margin: -8rem;
+  }
+
+  .xl\:-m-35{
+    margin: -9.3rem;
+  }
+
+  .xl\:-m-38{
+    margin: -9.5rem;
   }
 
   .xl\:-m-40{
@@ -32752,6 +33586,26 @@ button {
   .xl\:mx-32{
     margin-left: 8rem;
     margin-right: 8rem;
+  }
+
+  .xl\:my-35{
+    margin-top: 9.3rem;
+    margin-bottom: 9.3rem;
+  }
+
+  .xl\:mx-35{
+    margin-left: 9.3rem;
+    margin-right: 9.3rem;
+  }
+
+  .xl\:my-38{
+    margin-top: 9.5rem;
+    margin-bottom: 9.5rem;
+  }
+
+  .xl\:mx-38{
+    margin-left: 9.5rem;
+    margin-right: 9.5rem;
   }
 
   .xl\:my-40{
@@ -32942,6 +33796,26 @@ button {
   .xl\:-mx-32{
     margin-left: -8rem;
     margin-right: -8rem;
+  }
+
+  .xl\:-my-35{
+    margin-top: -9.3rem;
+    margin-bottom: -9.3rem;
+  }
+
+  .xl\:-mx-35{
+    margin-left: -9.3rem;
+    margin-right: -9.3rem;
+  }
+
+  .xl\:-my-38{
+    margin-top: -9.5rem;
+    margin-bottom: -9.5rem;
+  }
+
+  .xl\:-mx-38{
+    margin-left: -9.5rem;
+    margin-right: -9.5rem;
   }
 
   .xl\:-my-40{
@@ -33216,6 +34090,38 @@ button {
 
   .xl\:ml-32{
     margin-left: 8rem;
+  }
+
+  .xl\:mt-35{
+    margin-top: 9.3rem;
+  }
+
+  .xl\:mr-35{
+    margin-right: 9.3rem;
+  }
+
+  .xl\:mb-35{
+    margin-bottom: 9.3rem;
+  }
+
+  .xl\:ml-35{
+    margin-left: 9.3rem;
+  }
+
+  .xl\:mt-38{
+    margin-top: 9.5rem;
+  }
+
+  .xl\:mr-38{
+    margin-right: 9.5rem;
+  }
+
+  .xl\:mb-38{
+    margin-bottom: 9.5rem;
+  }
+
+  .xl\:ml-38{
+    margin-left: 9.5rem;
   }
 
   .xl\:mt-40{
@@ -33520,6 +34426,38 @@ button {
 
   .xl\:-ml-32{
     margin-left: -8rem;
+  }
+
+  .xl\:-mt-35{
+    margin-top: -9.3rem;
+  }
+
+  .xl\:-mr-35{
+    margin-right: -9.3rem;
+  }
+
+  .xl\:-mb-35{
+    margin-bottom: -9.3rem;
+  }
+
+  .xl\:-ml-35{
+    margin-left: -9.3rem;
+  }
+
+  .xl\:-mt-38{
+    margin-top: -9.5rem;
+  }
+
+  .xl\:-mr-38{
+    margin-right: -9.5rem;
+  }
+
+  .xl\:-mb-38{
+    margin-bottom: -9.5rem;
+  }
+
+  .xl\:-ml-38{
+    margin-left: -9.5rem;
   }
 
   .xl\:-mt-40{
@@ -33884,6 +34822,14 @@ button {
     padding: 8rem;
   }
 
+  .xl\:p-35{
+    padding: 9.3rem;
+  }
+
+  .xl\:p-38{
+    padding: 9.5rem;
+  }
+
   .xl\:p-40{
     padding: 10rem;
   }
@@ -34042,6 +34988,26 @@ button {
   .xl\:px-32{
     padding-left: 8rem;
     padding-right: 8rem;
+  }
+
+  .xl\:py-35{
+    padding-top: 9.3rem;
+    padding-bottom: 9.3rem;
+  }
+
+  .xl\:px-35{
+    padding-left: 9.3rem;
+    padding-right: 9.3rem;
+  }
+
+  .xl\:py-38{
+    padding-top: 9.5rem;
+    padding-bottom: 9.5rem;
+  }
+
+  .xl\:px-38{
+    padding-left: 9.5rem;
+    padding-right: 9.5rem;
   }
 
   .xl\:py-40{
@@ -34316,6 +35282,38 @@ button {
 
   .xl\:pl-32{
     padding-left: 8rem;
+  }
+
+  .xl\:pt-35{
+    padding-top: 9.3rem;
+  }
+
+  .xl\:pr-35{
+    padding-right: 9.3rem;
+  }
+
+  .xl\:pb-35{
+    padding-bottom: 9.3rem;
+  }
+
+  .xl\:pl-35{
+    padding-left: 9.3rem;
+  }
+
+  .xl\:pt-38{
+    padding-top: 9.5rem;
+  }
+
+  .xl\:pr-38{
+    padding-right: 9.5rem;
+  }
+
+  .xl\:pb-38{
+    padding-bottom: 9.5rem;
+  }
+
+  .xl\:pl-38{
+    padding-left: 9.5rem;
   }
 
   .xl\:pt-40{
@@ -36088,6 +37086,14 @@ button {
 
   .xl\:w-32{
     width: 8rem;
+  }
+
+  .xl\:w-35{
+    width: 9.3rem;
+  }
+
+  .xl\:w-38{
+    width: 9.5rem;
   }
 
   .xl\:w-40{

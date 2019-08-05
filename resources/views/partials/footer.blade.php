@@ -1,4 +1,4 @@
-<footer class="text-white static" style="background-color: #1a1a1a">
+<footer class="text-white static bottom-0" style="background-color: #1a1a1a">
   <div class="container mx-auto px-5 sm:px-16 py-10 lg:py-14">
     <div class="flex flex-col lg:flex-row mb-8 lg:items-stretch text-white">
         
