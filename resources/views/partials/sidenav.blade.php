@@ -7,9 +7,9 @@
         <vue-letter-avatar name='{{ Auth::user()->name }}' size='40' :rounded=true />
        </div>    
       @endif     
-        <a class="mb-4 p-2 no-underline text-3xl text-white font-bold uppercase" href="/tips">Tips</a>
-        <a class="mb-4 p-2 no-underline text-3xl text-white font-bold uppercase" href="/inplay">Inplay</a>
-        <a class="mb-4 p-2 no-underline text-3xl text-white font-bold uppercase" href="/specials">SPECIALS</a>
+        <a class="mb-4 p-2 no-underline text-3xl text-white font-bold uppercase" href="{{ route('pre-match-tips') }}">Tips</a>
+        <a class="mb-4 p-2 no-underline text-3xl text-white font-bold uppercase" href="{{ route('inplay-tips') }}">Inplay</a>
+        <a class="mb-4 p-2 no-underline text-3xl text-white font-bold uppercase" href="{{ route('specials') }}">SPECIALS</a>
       @if(Auth::user())       
         <a class="mb-4 p-2 no-underline text-3xl text-white font-bold uppercase" href="/settings">settings</a>           
       @endif           
