@@ -1,5 +1,5 @@
 @guest
-<div class="bg-blue-blue_special border-b border-blue-blue_special_dark">
+<div class="bg-blue-blue_special">
     <div class="container mx-auto flex items-center justify-center py-3 px-5 sm:px-24">              
         @if(Route::has('register'))
         <a href="{{ route('register') }} ">
