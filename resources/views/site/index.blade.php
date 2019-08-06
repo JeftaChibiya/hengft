@@ -54,7 +54,7 @@
                         </div>
                         <div class="h-10 flex-1 flex text-center justify-center items-center relative">
                             Day 3
-                            <div class="absolute right-0 mr-2 h-3 w-3 rounded-full bg-gray-800"></div>                            
+                            <div class="hidden sm:block absolute right-0 mr-2 h-3 w-3 rounded-full bg-gray-800"></div>                            
                         </div>            
                     </div>             
                 </div>                
