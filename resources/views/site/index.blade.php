@@ -46,11 +46,11 @@
                     <div class="flex items-stretch rounded-full w-full text-xl text-gray-800 font-bold green_to_yellow">
                         <div class="h-10 flex-1 flex text-center justify-center items-center relative">
                             Day 1
-                            <div class="middle-div h-3 w-3 rounded-full bg-gray-800"></div>                            
+                            <div class="hidden sm:block  middle-div h-3 w-3 rounded-full bg-gray-800"></div>                            
                         </div>
                         <div class="h-10 flex-1 flex text-center justify-center items-center relative">
                             Day 2
-                            <div class="middle-div h-3 w-3 rounded-full bg-gray-800"></div>
+                            <div class="hidden sm:block middle-div h-3 w-3 rounded-full bg-gray-800"></div>
                         </div>
                         <div class="h-10 flex-1 flex text-center justify-center items-center relative">
                             Day 3

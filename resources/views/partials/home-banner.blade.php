@@ -6,7 +6,7 @@
         Get straight to the tips. No ad popups
     </p>   
 
-    <a href="/tips" class="no-underline mt-10 self-center w-full sm:w-auto sm:mx-auto mb-10 sm:mb-20">
+    <a href="{{ route('pre-match-tips') }}" class="no-underline mt-10 self-center w-full sm:w-auto sm:mx-auto mb-10 sm:mb-20">
         <button class="w-full tracking-wider sm:tracking-wide py-4 sm:py-3 sm:px-10 sm:p-4 bg-yellow-300 hover:bg-yellow-400 sm:text-md text-black text-center font-bold rounded-full focus:outline-none" style="transition: .5s">
             BROWSE TIPS
         </button>     
