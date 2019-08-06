@@ -23,13 +23,13 @@
         <div class="flex flex-col lg:p-10 bg-transparent py-2">
             <ul class="flex list-reset justify-around font-light flex-col text-md text-gray-200 hover:text-gray-100 text-md">
                 <li class="mb-2">
-                    <a href="/tips" class="no-underline mb-3">Pre-game Tips</a>
+                    <a href="{{ route('pre-match-tips') }}" class="no-underline mb-3">Pre-game Tips</a>
                 </li>
                 <li class="mb-2">
-                    <a href="/inplay" class="no-underline mb-3">Inplay Tips</a>
+                    <a href="{{ route('inplay-tips') }}" class="no-underline mb-3">Inplay Tips</a>
                 </li>                        
                 <li class="mb-2">
-                    <a href="/specials" class="no-underline mb-3">Specials</a>
+                    <a href="{{ route('specials') }}" class="no-underline mb-3">Specials</a>
                 </li> 
             </ul>               
         </div> 
