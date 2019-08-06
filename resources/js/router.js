@@ -56,11 +56,11 @@ const router = new VueRouter({
           meta: {title: 'HengFT'}                                        
         },   
         {               
-          path: '/tips',
+          path: '/pre-match-tips',
           meta: {title: 'HengFT | Pre-match Tips'}                                        
         },   
         {               
-          path: '/inplay',
+          path: '/inplay-tips',
           meta: {title: 'HengFT | Inplay Tips'}                                        
         },                                 
         {               

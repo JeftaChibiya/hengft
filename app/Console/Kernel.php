@@ -30,7 +30,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('tips:delete-old-tips')->dailyAt('11:59'); 
         
         /** send email to user: account about to be deleted */        
-        $schedule->command('subscriber:deletion-notification')->hourly();
+        $schedule->command('notifications:delete-old')->hourly();
 
         /** delete user with cancelled subscription */        
         $schedule->command('delete:cancelled-subscriber')->dailyAt('11:59');
