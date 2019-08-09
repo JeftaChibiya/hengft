@@ -58,11 +58,11 @@
         },       
         created(){            
             // refresh data on component creation            
-            this.$store.dispatch('getSubscriptionData')              
+            this.$store.dispatch('getSettingsData')              
         },
         updated(){            
             // refresh data on component creation            
-            this.$store.dispatch('getSubscriptionData')              
+            this.$store.dispatch('getSettingsData')              
         }                    
     }
 </script>

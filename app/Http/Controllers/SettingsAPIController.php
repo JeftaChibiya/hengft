@@ -16,66 +16,54 @@ use Stripe\Invoice as StripeInvoice;
 
 
 class SettingsAPIController extends Controller
-{   
+{             
 
 
-    
     /**
-     *   Ensure User is Authentheticated first
      * 
-     *
-     * @return void
+     *  A data payload for user settings
+     * 
      */
-    public function __construct()
-    {
-        $this->middleware(['auth', 'verified']);
-
-    }            
-
-
-    //
-    public function SubscriptionLog()
+    public function settingsPayload()
     {   
+        // logged in user
         $user = auth()->user();
 
-        $nots = $user->notifications;
-
+        // current subscription
         $currentSubscribtion = $user->subscription('main');
 
-        $currentPlan = LocalStripePlan::where('plan_id', '=', $currentSubscribtion->stripe_plan)->get();
+        // current subscription plan
+        $currentPlan = LocalStripePlan::where('plan_id', '=', $currentSubscribtion->stripe_plan)->get();              
 
-        $stripeSubSync = $currentSubscribtion->asStripeSubscription();                
-
-        $date = Carbon::createFromTimeStamp($stripeSubSync->current_period_end); // subscription has started  
+        // end of ACTIVE / paid-for subscription
+        $item = Carbon::createFromTimeStamp($currentSubscribtion->asStripeSubscription()->current_period_end);  
          
-        $nextChargeDate = $date->format('F jS, Y');
+        // date of next charge
+        $nextChargeDate = $item->format('F jS, Y');
 
-        // calculate difference between the 2 dates with Carbon
+        // the difference between today and the next charge date
         $periodEnd = Carbon::parse($date);
         $now = Carbon::now();        
         $timeLeft  = $periodEnd->diffInDays($now);                
 
+        $all_plans = LocalStripePlan::all();        
+
         return [
-                'nots' => $nots,
                 'user' =>  $user, 
+                'plans' => $all_plans,                 
                 'timeLeft' => $timeLeft,
-                'plans' => LocalStripePlan::all(), 
                 'currentPlan' => $currentPlan,
-                'nextChargeDate' => $nextChargeDate
+                'nextChargeDate' => $nextChargeDate,
+                'currentSubscribtion' => $currentSubscribtion
         ];
 
     }
 
-
-    public function user()
-    { 
-        
-        return ['user' => Auth::user()];
-
-    }    
-
-
-    // invoices
+    /**
+     * 
+     *  User invoices
+     * 
+     */
     public function invoices()
     {
         $user = auth()->user();

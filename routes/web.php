@@ -39,8 +39,7 @@ Route::post('/cancel-subscription', 'UserSettingsController@cancelSubscription')
 Route::post('/resume-subscription', 'UserSettingsController@resumeSubscription');
 Route::post('/update-payment-details', 'UserSettingsController@updatePaymentDetails');
 
-Route::get('/subscription_log', 'SettingsAPIController@SubscriptionLog');
-Route::get('/user', 'SettingsAPIController@user');
+Route::get('/settings_payload', 'SettingsAPIController@settingsPayload');
 Route::get('/invoices', 'SettingsAPIController@invoices');
 
 // Entrance

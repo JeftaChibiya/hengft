@@ -26,15 +26,16 @@
     </div>    
 @stop
 
+<!-- content -->
 <div class="container mx-auto px-5 sm:px-24 pb-10 font-light leading-normal">
-    <div class="mb-10 text-lg text-gray-700">
+    <div class="w-full sm:w-1/2 mb-10 text-lg text-gray-700">
         HengFT offers a new member a number of days free before the start of their 
         paid membership and the billing of the payment method provided. The number of days a new member is offered
         is determined by the type of subscription selected on signing up. A new member will have 3 days free</b> for a Monthly 
         subscription, and 5 days for a Yearly subscription.
     </div>    
     <p class="text-gray-700 font-medium text-xl mb-2">When does it start and end?</p> 
-    <div class="mb-10 text-lg text-gray-700">
+    <div class="w-full sm:w-1/2 mb-10 text-lg text-gray-700">
         <p class="mb-6">
             The length of a given free trial is worked out in terms of hours from the day and time a new member signed up.
             Each day in a given free trial is 24 hours long. 
@@ -81,13 +82,11 @@
             </div>                                              
         </div> -->
 
-        <p class="mb-2"><span class="underline">Email Reminder</span>. An email reminder is then sent at the end of <b>DAY 2</b> of the Free trial.</p>
-
         <p class=""><span class="underline">First Billing Date</span>. The first charge on the payment method provided is made on the end of <b>DAY 3</b> of the Free trial.</p>        
     </div> 
 
     <p class="text-gray-700 font-medium text-xl mb-2">Why do I need a payment method to start a free trial?</p>     
-    <p class="mb-6 text-gray-700 text-lg">
+    <p class="w-full sm:w-1/2 mb-6 text-gray-700 text-lg">
         As stated on our <a href="/register" class="underline">Join</a>
         page, submitting a payment method along when you join increases the chance of only interested members 
         signining to our service. At the same time, this also helps us prevent spammers from signing up, 

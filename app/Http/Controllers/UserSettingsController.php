@@ -139,13 +139,13 @@ class UserSettingsController extends Controller
         }       
 
         // cancel instantly
-        if($request->get('when') == 'now'){          
+        if($request->get('when') === 'now'){          
 
             $user->subscription('main')->cancelNow(); // cancel instantly                                                        
 
         }
         // cancel at the end of grace period using scheduler 
-        else if($request->get('when') == 'later'){
+        else if($request->get('when') === 'later'){
            
             $user->subscription('main')->cancel();  // cancel later                        
                           

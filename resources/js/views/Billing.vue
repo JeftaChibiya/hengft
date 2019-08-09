@@ -132,7 +132,7 @@
             trialEndDate(){
                 let date = moment(this.currentSubscribtion[0].trial_ends_at).unix();
 
-                let humanReadableDate = moment(this.currentSubscribtion[0].trial_ends_at).format('dddd, MMMM Do YYYY')
+                let humanReadableDate = moment(this.currentSubscribtion[0].trial_ends_at).format('ddd, MMM Do YYYY')
 
                 return { date, humanReadableDate };
             }         
@@ -164,18 +164,7 @@
             else if(this.activePlan.stripe_plan != this.currentPlan.plan_id) {
               this.restrict = false
             }           
-        }
-
-        // watch: {
-        //   restrict(){
-        //       if(this.activePlan.plan_id === this.currentSubscribtion.stripe_plan || this.activePlan.stripe_plan === this.currentSubscribtion.stripe_plan){
-        //         return true
-        //       }
-        //       else if(this.activePlan.plan_id != this.currentSubscribtion.stripe_plan || this.activePlan.stripe_plan != this.currentSubscribtion.stripe_plan) {
-        //         return false
-        //       }                             
-        //   }
-        // },        
+        }      
     }
 </script>
   

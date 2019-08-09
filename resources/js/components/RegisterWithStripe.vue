@@ -77,9 +77,14 @@ export default {
                     color: '#E53A40',
                     iconColor: '#fa755a'
                 }
-            }; 
+            };             
+
             // instantiate card element
-            card = elements.create('card', {style});
+            card = elements.create('card', {
+                            style, 
+                            hidePostalCode: true
+                    });           
+           
             // mount it to the 'card' variable above
             card.mount(this.$refs.card);        
             
@@ -102,8 +107,7 @@ export default {
             let self = this;             
 
             await stripe.createToken(card).then(function(result) {
-                if (result.error) {     
-                    self.deactivate = true;                                       
+                if (result.error) {                                        
                     // Inform the customer that there was an error.
                     self.cardErrorOnSubmit = result.error.message;                
                 } else {
@@ -119,7 +123,6 @@ export default {
             // register
             formInput.append('plan', self.activePlan.id);            
             formInput.append('stripeToken', self.stripeToken.id);
-
             formInput.append('name', self.customer.name);
             formInput.append('email', self.customer.email);               
             formInput.append('password', self.customer.password);                                                          
@@ -137,26 +140,17 @@ export default {
             })                               
         }                    
     },  
-    // clear existing card object before new one
-    beforeMount: function () {
-        
-        card.unmount();
-        card.destroy()           
+    // clear existing card object before new one     
+    beforeMount(){
 
-    },           
-    mounted: function () {
+        card.unmount(); 
+        card.destroy(); 
+
+    },     
+    mounted() {
         
         this.setUpStripe()   
 
-    },  
-    created(){
-
-    },
-    // destroy current card element before exiting this component 
-    reset () {
-        card.unmount();
-        card.destroy();
-        destroy()          
-    }               
+    },                
 }
 </script>

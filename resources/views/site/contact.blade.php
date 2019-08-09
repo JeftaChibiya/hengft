@@ -28,7 +28,9 @@
         </div>
     </div>
 @stop
-
+<div class="bg-blue-200">
+    <p class="mx-auto px-5 sm:px-16 p-5 text-gray-700 text-lg">We're currently working on our contact methods. Please email us at: <b>support@hengft.com</b></p>
+</div>
 
 <div class="container mx-auto px-5 sm:px-16 pb-10"> 
     <!-- parent flex -->

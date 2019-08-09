@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Auth;
 /** Essential custom classes  */
 use App\User;
 use Carbon\Carbon;
-use Stripe\Error\Card as CardExpection; // Stripe Card object
+use Stripe\Error\Card as CardException; // Stripe Card object
 use App\LocalStripePlan;
 
 
@@ -67,6 +67,9 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
+            // stripe card token must be present
+            'stripeToken' => ['min:12', 'required', 'string', 'max:255'],            
+            'plan' => ['min:1', 'required', 'string', 'max:255'],
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
@@ -99,62 +102,69 @@ class RegisterController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function register(Request $request)
-    {
-        $this->validator($request->all())->validate();                
-  
+    {                         
 
-        /** only run if token exists */      
+        try {                              
+            /** only run if token exists */                                  
+            $this->createAndSubscribe($request);               
+                          
+        } 
+        /** Errors related to selected plan or credentials */
+        catch (Exception $e) {
+            
+            return back()->with($e->getMessage());
 
-            try {      
-                    event(new Registered($user = $this->create($request->all())));     
-        
-                    // stripe payment token from the request / card object
-                    $token = request('stripeToken'); 
+        }  
+        /** Errors related to Stripe card */        
+        catch (CardException $e) {
+            
+            return back()->with($e->getJsonBody());         
 
-                    // find corresponding subscription plan in Db
-                    $selectPlan = LocalStripePlan::find(request('plan')); 
-        
-                    
-                    // create stripe user, start trial, no payment taken
-                    $user->newSubscription('main', $selectPlan->plan_id)
-                            ->trialUntil(Carbon::now()->addDays($selectPlan->trial_period_days))               
-                            ->create($token,['name' =>  $user->name, 'email' => $user->email
-                    ]);                         
-        
-        
-                    // login user
-                    $this->guard()->login($user);                       
-        
-                    return $this->registered($request, $user) ?: redirect($this->redirectPath());  
-
-            } 
-            /** Errors related to selected plan or credentials */
-            catch (Exception $e) {
-                
-                return back()->with($e->getMessage());
-
-            }  
-            /** Errors related to Stripe card */        
-            catch (CardExpection $e) {
-                
-                return back()->with($e->getJsonBody());         
-
-            }                             
+        }                             
     }    
 
 
-    /**
-     * The user has been registered.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  mixed  $user
-     * @return mixed
+
+    /** 
+     *  
+     *  create new user + subscribe to plan with Stripe...
+     * 
      */
-    protected function registered(Request $request, $user)
-    {
+    protected function createAndSubscribe($request){      
+            
+        // validate first
+        $this->validator($request->all())->validate();                 
+
+        // create new user in db
+        event(new Registered($user = $this->create($request->all())));    
         
-        
-        
+        // create a customer and an account on Stripe
+        $this->subscribeUser($user, $request);
+
+        // login user
+        $this->guard()->login($user);                       
+
+        // redirect to desired page
+        return $this->registered($request, $user) ?: redirect($this->redirectPath());       
+
     }
+
+
+    
+    protected function subscribeUser($user, $request){ 
+
+        // stripe payment token from the request / card object
+        $token = $request->input('stripeToken');               
+
+        // find corresponding subscription plan in Db
+        $selectPlan = LocalStripePlan::find(request('plan')); 
+
+        
+        // create stripe user, start trial, no payment taken
+        $user->newSubscription('main', $selectPlan->plan_id)
+                ->trialUntil(Carbon::now()->addDays($selectPlan->trial_period_days))               
+                ->create($token,['name' =>  $user->name, 'email' => $user->email
+        ]); 
+    }    
 
 }

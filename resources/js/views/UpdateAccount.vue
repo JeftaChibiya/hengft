@@ -80,7 +80,7 @@
         },       
         mounted(){
           this.loading = true;
-          this.$store.dispatch('getSubscriptionData')  
+          this.$store.dispatch('getSettingsData')  
         }         
     }
 </script>

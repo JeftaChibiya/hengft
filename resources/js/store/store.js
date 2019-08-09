@@ -8,6 +8,10 @@ Vue.use(Vuex);
 export const store = new Vuex.Store({   
 
     state: {
+        // Cache version
+        version: '',
+        count: 1,  
+              
         nots: [],
         user: {}, 
         when: '',   
@@ -23,7 +27,7 @@ export const store = new Vuex.Store({
     
     plugins: [createPersistedState()],    
 
-    mutations: {
+    mutations: {  
         // replace the current state when new data becomes available
 		initialiseStore(state) {
 			// Check if the ID exists
@@ -33,12 +37,12 @@ export const store = new Vuex.Store({
 					Object.assign(state, JSON.parse(localStorage.getItem('store')))
 				);
 			}
-		},        
+		},            
         cancellationTime(state, payload){
             state.when = payload.when
         },
-        subscriptionData: function (state, payload) {
-            state.nots = payload.nots;                      
+        settingsData: function (state, payload) {
+            state.nots = payload.user.notifications;                      
             state.user = payload.user; 
             state.plans = payload.plans;
             state.timeLeft = payload.timeLeft;            
@@ -62,20 +66,18 @@ export const store = new Vuex.Store({
     },
 
     actions: {
-        // 
-        getSubscriptionData : async(context, payload) => {
-                await axios.get('/subscription_log')
+        // get most of user-related subscription data
+        getSettingsData : async(context, payload) => {
+                await axios.get('/settings_payload')
                     .then(res => {                  
-                        context.commit('subscriptionData', res.data); 
-                        console.log(res.data)                                                                                                                     
+                        context.commit('settingsData', res.data);                                                                                                                 
                 }); 
         },
-        // get previous invoices, one upcoming invoice
+        // get previous invoices + one upcoming invoice
         getInvoiceData : async (context, payload) => {
                 await axios.get('/invoices')
                     .then(res => {
-                      context.commit('invoiceData', res.data);                                     
-                      console.log(res.data)                       
+                      context.commit('invoiceData', res.data);                                                           
                 });  
         },
         // set when to cancel the subscription

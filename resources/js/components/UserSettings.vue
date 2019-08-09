@@ -31,16 +31,23 @@
            return {date , humanReadableDate};
         }          
       },            
-      created() {      
+      created() {             
+
         // if no current route - push root view 'settings/account
         if(!this.$router.currentRoute.name){
+          
           this.$router.push('/account/details/update');
+
         }
         // if there is one, but page is reloaded, current route / view is maintained
         else{
+          
           this.$router.push(this.$router.currentRoute) 
-        }
 
+        }
+      },
+      mounted(){
+          this.$store.dispatch('getSettingsData')          
       }
     }
 </script>

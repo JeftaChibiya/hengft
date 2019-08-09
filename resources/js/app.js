@@ -48,8 +48,11 @@ document.addEventListener('turbolinks:load', () => {
             PreMatchTips,                                    
             RegisterWithStripe,                       
         },
-        beforeCreate() {
-          this.$store.commit('initialiseStore');
-        }                
+        
+        mounted: function(){
+
+          this.$store.commit('initialiseStore');           
+
+        }
     });
   });

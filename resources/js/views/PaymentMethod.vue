@@ -148,7 +148,7 @@ let stripe = Stripe('pk_live_4wktgZA6yJrZU4beXGCoXXdE00qmn1gR6N'),
             this.setUpStripe();                      
         },
         created: function () {                                
-            this.$store.dispatch('getSubscriptionData')                                              
+            this.$store.dispatch('getSettingsData')                                              
         }                  
     }
 </script>
