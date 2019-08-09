@@ -103,10 +103,34 @@ class RegisterController extends Controller
      */
     public function register(Request $request)
     {                         
+        // validate first
+        $this->validator($request->all())->validate();                 
+
+        // create new user in db
+        event(new Registered($user = $this->create($request->all())));
+        
+        // stripe payment token from the request / card object
+        $token = request('stripeToken');               
+
+        // find corresponding subscription plan in Db
+        $selectPlan = LocalStripePlan::find(request('plan'));     
+
+
 
         try {                              
             /** only run if token exists */                                  
-            $this->createAndSubscribe($request);               
+
+            // create stripe user, start trial, no payment taken
+            $user->newSubscription('main', $selectPlan->plan_id)
+                    ->trialUntil(Carbon::now()->addDays($selectPlan->trial_period_days))               
+                    ->create($token,['name' =>  $user->name, 'email' => $user->email
+            ]); 
+
+            // login user
+            $this->guard()->login($user);                       
+
+            // redirect to desired page
+            return $this->registered($request, $user) ?: redirect($this->redirectPath());              
                           
         } 
         /** Errors related to selected plan or credentials */
@@ -121,50 +145,6 @@ class RegisterController extends Controller
             return back()->with($e->getJsonBody());         
 
         }                             
-    }    
-
-
-
-    /** 
-     *  
-     *  create new user + subscribe to plan with Stripe...
-     * 
-     */
-    protected function createAndSubscribe($request){      
-            
-        // validate first
-        $this->validator($request->all())->validate();                 
-
-        // create new user in db
-        event(new Registered($user = $this->create($request->all())));    
-        
-        // create a customer and an account on Stripe
-        $this->subscribeUser($user, $request);
-
-        // login user
-        $this->guard()->login($user);                       
-
-        // redirect to desired page
-        return $this->registered($request, $user) ?: redirect($this->redirectPath());       
-
-    }
-
-
-    
-    protected function subscribeUser($user, $request){ 
-
-        // stripe payment token from the request / card object
-        $token = $request->input('stripeToken');               
-
-        // find corresponding subscription plan in Db
-        $selectPlan = LocalStripePlan::find(request('plan')); 
-
-        
-        // create stripe user, start trial, no payment taken
-        $user->newSubscription('main', $selectPlan->plan_id)
-                ->trialUntil(Carbon::now()->addDays($selectPlan->trial_period_days))               
-                ->create($token,['name' =>  $user->name, 'email' => $user->email
-        ]); 
-    }    
+    }      
 
 }
