@@ -124,13 +124,14 @@ class RegisterController extends Controller
             $user->newSubscription('main', $selectPlan->plan_id)
                     ->trialUntil(Carbon::now()->addDays($selectPlan->trial_period_days))               
                     ->create($token,['name' =>  $user->name, 'email' => $user->email
-            ]); 
+            ]);          
 
             // login user
             $this->guard()->login($user);                       
 
             // redirect to desired page
-            return $this->registered($request, $user) ?: redirect($this->redirectPath());              
+            return $this->registered($request, $user)
+                            ?: redirect($this->redirectPath());   
                           
         } 
         /** Errors related to selected plan or credentials */
