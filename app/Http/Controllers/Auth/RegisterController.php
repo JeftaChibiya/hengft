@@ -5,12 +5,13 @@ namespace App\Http\Controllers\Auth;
 /** Essential custom classes  */
 use App\User;
 use Carbon\Carbon;
-use Stripe\Error\Card as CardException; // Stripe Card object
 use App\LocalStripePlan;
+use Stripe\Error\Card as CardException; // Stripe Card object
 
 
 /** Laravel classes  */
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -54,6 +55,21 @@ class RegisterController extends Controller
     {
         $this->middleware('guest');
     }
+
+
+
+
+    /**
+     * Get the guard to be used during registration.
+     *
+     * @return \Illuminate\Contracts\Auth\StatefulGuard
+     */
+    protected function guard()
+    {
+     
+        return Auth::guard();
+
+    }    
 
     
     
@@ -146,6 +162,22 @@ class RegisterController extends Controller
             return back()->with($e->getJsonBody());         
 
         }                             
-    }      
+    }
+    
+    
+    
+    /**
+     * The user has been registered.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  mixed  $user
+     * @return mixed
+     */
+    protected function registered(Request $request, $user)
+    {
+     
+        //
+
+    }    
 
 }
