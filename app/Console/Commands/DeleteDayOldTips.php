@@ -51,6 +51,10 @@ class DeleteDayOldTips extends Command
      */
     public function handle()
     {
+        $yesterday = Carbon::yesterday();        
+        
+        $this->info('Tips published ' . $yesterday . ' now deleted');
+
         // remove pre-match tips older than today
         DB::table('tips')->where('created_at', '<', Carbon::today())->delete();
 

@@ -26,8 +26,10 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {   
+        $schedule->command('inspire')->everyMinute();        
+
         /** delete day-old tips and inplay tips */
-        $schedule->command('tips:delete-old-tips')->dailyAt('11:59'); 
+        $schedule->command('tips:delete-old-tips')->dailyAt('11:59')->appendOutputTo(storage_path('logs/tips.log'));;  
         
         /** send email to user: account about to be deleted */        
         $schedule->command('notifications:delete-old')->hourly();

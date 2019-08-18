@@ -123,18 +123,16 @@ class RegisterController extends Controller
         $this->validator($request->all())->validate();                 
 
         // create new user in db
-        event(new Registered($user = $this->create($request->all())));
-        
-        // stripe payment token from the request / card object
-        $token = request('stripeToken');               
-
-        // find corresponding subscription plan in Db
-        $selectPlan = LocalStripePlan::find(request('plan'));     
-
+        event(new Registered($user = $this->create($request->all())));   
 
 
         try {                              
-            /** only run if token exists */                                  
+
+            // stripe payment token from the request / card object
+            $token = request('stripeToken');               
+
+            // find corresponding subscription plan in Db
+            $selectPlan = LocalStripePlan::find(request('plan'));                  
 
             // create stripe user, start trial, no payment taken
             $user->newSubscription('main', $selectPlan->plan_id)
