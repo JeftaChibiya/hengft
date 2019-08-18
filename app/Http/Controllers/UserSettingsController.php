@@ -168,14 +168,22 @@ class UserSettingsController extends Controller
         // if now
         $user = $request->user();
 
-        // resume account on Stripe's end
-        $user->subscription('main')->resume(); 
-        
-        // send email confirmation
-        // Mail::to($request->user())->send(new ResumeSubscription($user));         
-        
-        // return flash         
-        $request->session()->flash('flash', 'Resuming subscription...'); 
+        try{
+
+            // resume account on Stripe's end
+            $user->subscription('main')->resume();        
+            
+            // return flash         
+            $request->session()->flash('flash', 'Resuming subscription...'); 
+
+        }
+        // if unable to resume subscription not on grace period
+        catch(\Stripe\Error\InvalidRequest $e){
+            
+            // return flash         
+            $request->session()->flash('flash', 'Cannot resume. Less than a day left');             
+
+        }
 
     }      
    

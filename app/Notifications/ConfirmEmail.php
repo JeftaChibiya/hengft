@@ -59,7 +59,7 @@ class ConfirmEmail extends VerifyEmailBase
             ->from('accounts@hengft.com', 'HengFT Tips')       
             ->subject(Lang::getFromJson('Confirm your HengFT email address'))
             ->line('Thanks for signing up')
-            ->line('We just need your to verify your email address.' )            
+            ->line('We just need you to verify your email address.' )            
             ->line(Lang::getFromJson('Please click the button below to activate your HengFT account'))
             ->action(
                 Lang::getFromJson('ACTIVATE ACCOUNT'),

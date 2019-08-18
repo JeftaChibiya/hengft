@@ -13,6 +13,7 @@ require('laravel-mix-tailwind');
  */
 
 mix.sass('resources/sass/app.scss', 'public/css')
+   .sass('resources/sass/hengft_admin.scss', 'public/css')
    .js('resources/js/app.js', 'public/js')
    .js('resources/js/landing.js', 'public/js')            
    .tailwind()        
