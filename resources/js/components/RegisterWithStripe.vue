@@ -6,7 +6,7 @@ import moment from 'moment'
 import SelectablePlan from './SelectablePlan';
 
 // stripe API key + element object + card variable filled on load
-let stripe = Stripe('pk_live_4wktgZA6yJrZU4beXGCoXXdE00qmn1gR6N'),
+let stripe = Stripe('pk_live_FQILEOk4ahqPUmpvVGshn39G00IW5wcSTb'),
     elements = stripe.elements(),
     card = undefined;
 
