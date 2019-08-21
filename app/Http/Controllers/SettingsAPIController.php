@@ -42,7 +42,7 @@ class SettingsAPIController extends Controller
         $nextChargeDate = $item->format('F jS, Y');
 
         // the difference between today and the next charge date
-        $periodEnd = Carbon::parse($date);
+        $periodEnd = Carbon::parse($nextChargeDate);
         $now = Carbon::now();        
         $timeLeft  = $periodEnd->diffInDays($now);                
 
