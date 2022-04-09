@@ -29,7 +29,7 @@
         "epic-spinners": "^1.1.0",
         "laravel-echo": "^1.5.4",
         "laravel-mix-tailwind": "^0.1.0",
-        "moment": "^2.24.0",
+        "moment": "^2.29.2",
         "socket.io-client": "^2.2.0",
         "turbolinks": "^5.2.0",
         "vue-chartjs": "^3.4.2",
